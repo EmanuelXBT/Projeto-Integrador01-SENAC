@@ -1,33 +1,31 @@
 @echo off
-title Automação Git - Projeto Integrador (Etapa 1)
+title Sincronização - Projeto Integrador (Etapa 1)
 cls
 echo ======================================================
-echo    GIT AUTOMATIZADO - PROJETO INTEGRADOR (ETAPA 1)
+echo    ATUALIZANDO PROJETO INTEGRADOR - ETAPA 1
 echo ======================================================
 echo.
 
-echo [1/4] Adicionando arquivos...
+echo [1/3] Identificando novas alterações...
 git add .
 
 echo.
-set /p desc="Descreva o que foi feito nesta parte da Etapa 1: "
+set /p desc="O que foi alterado nesta etapa? "
 set msg=PI-Etapa1: %desc%
 
 echo.
-echo [2/4] Criando commit: "%msg%"
+echo [2/3] Registrando mudanças: "%msg%"
 git commit -m "%msg%"
 
 echo.
-echo [3/4] Sincronizando com o GitHub...
-git pull origin main
-
-echo.
-echo [4/4] Enviando para o repositório remoto...
+echo [3/3] Enviando para o GitHub...
+:: O comando abaixo evita o erro de historias irrelevantes que voce teve
+git pull origin main --rebase
 git push origin main
 
 echo.
 echo ======================================================
-echo    ETAPA 1 ATUALIZADA COM SUCESSO!
+echo    ARQUIVOS SINCRONIZADOS COM SUCESSO!
 echo ======================================================
 echo.
 pause
