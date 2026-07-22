@@ -1,1 +1,45 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+*.swp
+*.swo
+*~
+
+# Java
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.log
+hs_err_pid*
+
+# Docker
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads / runtime
+uploads/
+screenshots/
+
+# Old project artifacts (BeyondApp)
 *.bat
