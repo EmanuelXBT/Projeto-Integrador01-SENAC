@@ -1,0 +1,73 @@
+name: Build & Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  docs-check:
+    name: 📄 Documentação
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verifica arquivos obrigatórios
+        run: |
+          required=("README.md" "LICENSE" "CONTRIBUTING.md" "CHANGELOG.md" ".env.example" "docs/DER.md" "docs/REQUISITOS.md" "docs/ARCHITECTURE.md")
+          for f in "${required[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "❌ Arquivo obrigatório ausente: $f"
+              exit 1
+            fi
+            echo "✅ $f"
+          done
+
+      - name: Verifica links quebrados nos markdowns
+        run: |
+          broken=0
+          for md in README.md docs/*.md CONTRIBUTING.md CHANGELOG.md; do
+            if [ -f "$md" ]; then
+              # Verifica links locais [texto](./arquivo) apontando para arquivos inexistentes
+              grep -oP '(?<=\]\()\./[^)]+' "$md" | while read -r link; do
+                target="${link#./}"
+                if [ ! -f "$target" ]; then
+                  echo "⚠️  Link quebrado em $md: $link"
+                fi
+              done
+            fi
+          done
+
+  java-build:
+    name: ☕ Java Build
+    runs-on: ubuntu-latest
+    needs: docs-check
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verifica se pom.xml existe (Etapa 2+)
+        id: check
+        run: |
+          if [ -f "pom.xml" ]; then
+            echo "has_code=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_code=false" >> $GITHUB_OUTPUT
+            echo "⚠️  pom.xml não encontrado — pulando build Java (código será adicionado na Etapa 2)"
+          fi
+
+      - name: Setup Java 17
+        if: steps.check.outputs.has_code == 'true'
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build com Maven
+        if: steps.check.outputs.has_code == 'true'
+        run: mvn compile --batch-mode
+
+      - name: Testes
+        if: steps.check.outputs.has_code == 'true'
+        run: mvn test --batch-mode
