@@ -1,0 +1,72 @@
+spring:
+  application:
+    name: qawler
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/qawler?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${SPRING_DATASOURCE_USERNAME:qawler_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:qawler_pass}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    open-in-view: false
+
+  rabbitmq:
+    host: ${SPRING_RABBITMQ_HOST:localhost}
+    port: ${SPRING_RABBITMQ_PORT:5672}
+    username: ${SPRING_RABBITMQ_USERNAME:guest}
+    password: ${SPRING_RABBITMQ_PASSWORD:guest}
+    listener:
+      simple:
+        concurrency: 3
+        max-concurrency: 5
+
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+
+  mail:
+    host: ${SMTP_HOST:smtp.gmail.com}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USER:}
+    password: ${SMTP_PASS:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: ${API_PORT:8080}
+
+# ── JWT ─────────────────────────────────────────────────
+jwt:
+  secret: ${JWT_SECRET:change-me-256-bit-secret-key-here}
+  expiration-ms: 86400000
+
+# ── AES-256 ─────────────────────────────────────────────
+aes:
+  secret-key: ${AES_SECRET_KEY:change-me-aes-256-key}
+
+# ── Crawler ─────────────────────────────────────────────
+crawler:
+  max-depth: 2
+  timeout-seconds: 30
+  user-agent: "QAwler/1.0 (QA Crawler; +https://github.com/EmanuelXBT/Projeto-Integrador01-SENAC)"
+  headless: ${SELENIUM_HEADLESS:true}
+  chromium-path: ${CHROMIUM_PATH:/usr/bin/chromium}
+
+# ── Logging ─────────────────────────────────────────────
+logging:
+  level:
+    br.com.qawler: INFO
+    org.springframework.amqp: WARN

@@ -1,6 +1,6 @@
 # 🕷️ QAwler — Projeto Integrador I · SENAC
 
-> ⚠️ **Etapa 1 de 3 — Planejamento e Documentação.** Este repositório contém apenas a especificação do sistema (requisitos, DER, stack). O código-fonte (`src/`, `docker-compose.yml`, `pom.xml`) será adicionado na Etapa 2 (Desenvolvimento). Veja o [Roadmap](#-roadmap) para detalhes.
+> ⚠️ **Etapa 2 de 3 — Desenvolvimento.** O código-fonte está em implementação ativa. Veja o [Roadmap](#-roadmap) para detalhes.
 
 > **Varredura automatizada de QA para ambientes web · Java 17 + Spring Boot + MySQL + Selenium**
 
