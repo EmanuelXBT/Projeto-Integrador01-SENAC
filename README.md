@@ -1,6 +1,6 @@
 # 🕷️ QAwler — Projeto Integrador I · SENAC
 
-> ⚠️ **Etapa 2 de 3 — Desenvolvimento.** O código-fonte está em implementação ativa. Veja o [Roadmap](#-roadmap) para detalhes.
+> ⚠️ **Etapa 2 de 3 — Desenvolvimento** O código-fonte está em implementação ativa. Veja o [Roadmap](#-roadmap) para detalhes.
 
 > **Varredura automatizada de QA para ambientes web · Java 17 + Spring Boot + MySQL + Selenium**
 
