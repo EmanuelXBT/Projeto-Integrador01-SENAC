@@ -1,4 +1,4 @@
-# QA Autopilot - DER Completo
+# QAwler — DER Completo
 ## 8 Tabelas | MySQL 8 | InnoDB
 
 usuario 1--N sistema 1--N teste 1--N pagina_visitada

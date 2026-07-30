@@ -1,4 +1,4 @@
-# QA Autopilot — Requisitos do Sistema
+# QAwler — Requisitos do Sistema
 
 ## Visão
 
