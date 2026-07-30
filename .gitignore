@@ -32,6 +32,7 @@ hs_err_pid*
 
 # Docker
 .env
+.env.example.docker
 
 # OS
 .DS_Store
@@ -40,6 +41,3 @@ Thumbs.db
 # Uploads / runtime
 uploads/
 screenshots/
-
-# Old project artifacts (BeyondApp)
-*.bat
