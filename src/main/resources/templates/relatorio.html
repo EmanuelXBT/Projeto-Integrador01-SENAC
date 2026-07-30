@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QAwler — Relatório</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body { background: #0f172a; color: #e2e8f0; }
+        .container { max-width: 960px; padding-top: 2rem; }
+        .report-header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .report-header h1 { color: #38bdf8; font-weight: 700; }
+        .report-header .meta { color: #94a3b8; }
+        .section-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-card h4 { color: #38bdf8; margin-bottom: 1rem; }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+            gap: 1rem;
+        }
+        .summary-item {
+            background: #0f172a;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        .summary-item .num { font-size: 1.75rem; font-weight: 700; }
+        .summary-item .lbl { color: #94a3b8; font-size: 0.85rem; }
+        .bug-table { width: 100%; border-collapse: collapse; }
+        .bug-table th { color: #94a3b8; font-weight: 500; padding: 0.5rem; border-bottom: 1px solid #334155; }
+        .bug-table td { padding: 0.5rem; border-bottom: 1px solid #1e293b; }
+        .bug-table tr:hover td { background: #0f172a; }
+        .badge-critical { background: #ef4444; color: #fff; }
+        .badge-high     { background: #f97316; color: #fff; }
+        .badge-medium   { background: #fbbf24; color: #0f172a; }
+        .badge-low      { background: #94a3b8; color: #0f172a; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <nav class="mb-3">
+        <a href="/dashboard" class="text-decoration-none" style="color:#38bdf8;">← Dashboard</a>
+    </nav>
+
+    <!-- Header -->
+    <div class="report-header">
+        <h1>Relatório de Teste</h1>
+        <div class="meta mt-2">
+            <span th:text="'Sistema: ' + ${relatorio.sistemaNome}">Sistema: -</span>
+            <span class="mx-2">|</span>
+            <span th:text="'Teste #' + ${relatorio.testeId}">Teste #-</span>
+            <span class="mx-2">|</span>
+            <span th:text="'Gerado em ' + ${relatorio.geradoEm}">Gerado em -</span>
+        </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="section-card">
+        <h4>Resumo</h4>
+        <div class="summary-grid">
+            <div class="summary-item">
+                <div class="num" style="color:#38bdf8;" th:text="${relatorio.totalScanners}">0</div>
+                <div class="lbl">Scanners executados</div>
+            </div>
+            <div class="summary-item">
+                <div class="num" style="color:#34d399;" th:text="${relatorio.paginasVisitadas}">0</div>
+                <div class="lbl">Páginas visitadas</div>
+            </div>
+            <div class="summary-item">
+                <div class="num" style="color:#f87171;" th:text="${relatorio.totalBugs}">0</div>
+                <div class="lbl">Bugs encontrados</div>
+            </div>
+            <div class="summary-item">
+                <div class="num" style="color:#fbbf24;" th:text="${relatorio.duracao}">0s</div>
+                <div class="lbl">Duração</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bug List -->
+    <div class="section-card">
+        <h4>
+            <i class="bi bi-bug me-2"></i>Bugs Encontrados
+            <span class="badge bg-secondary ms-2" th:text="${#lists.size(bugs)}">0</span>
+        </h4>
+
+        <div th:if="${#lists.isEmpty(bugs)}" class="text-center text-muted py-3">
+            <i class="bi bi-check-circle" style="font-size:2rem; color:#34d399;"></i>
+            <p class="mt-2">Nenhum bug encontrado durante a varredura.</p>
+        </div>
+
+        <table th:unless="${#lists.isEmpty(bugs)}" class="bug-table">
+            <thead>
+                <tr>
+                    <th style="width:50px;">#</th>
+                    <th style="width:100px;">Tipo</th>
+                    <th style="width:90px;">Severidade</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="bug, iterStat : ${bugs}">
+                    <td th:text="${iterStat.index + 1}">1</td>
+                    <td><span class="badge bg-secondary" th:text="${bug.tipo}">HTTP</span></td>
+                    <td>
+                        <span th:class="'badge badge-' + ${bug.severidadeClass}"
+                              th:text="${bug.severidade}">HIGH</span>
+                    </td>
+                    <td>
+                        <div th:text="${bug.mensagem}">Descrição do bug</div>
+                        <small class="text-muted" th:text="${bug.detalhe}">detalhe adicional</small>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Scanner details -->
+    <div class="section-card">
+        <h4><i class="bi bi-search me-2"></i>Detalhamento por Scanner</h4>
+
+        <div th:each="sc : ${relatorio.scannerResults}" class="mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <strong th:text="${sc.nome}" style="color:#e2e8f0;">HTTP Scanner</strong>
+                <span th:if="${sc.passed}" class="badge bg-success">OK</span>
+                <span th:unless="${sc.passed}" class="badge bg-danger" th:text="${sc.issueCount} + ' issues'">N issues</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download -->
+    <div class="text-center mb-5">
+        <form th:action="@{/api/relatorios/pdf}" method="post">
+            <input type="hidden" name="testeId" th:value="${relatorio.testeId}">
+            <input type="hidden" name="sistemaNome" th:value="${relatorio.sistemaNome}">
+            <button type="submit" class="btn btn-lg" style="background:#38bdf8; color:#0f172a; font-weight:600;">
+                <i class="bi bi-download me-2"></i>Baixar PDF
+            </button>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
