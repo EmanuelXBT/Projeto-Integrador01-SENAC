@@ -124,7 +124,3 @@ docker-compose up -d
 ## 📄 Licença
 
 Este projeto está licenciado sob a licença MIT — veja o arquivo [LICENSE](./LICENSE) para detalhes.
-
----
-
-> 🔒 **Aviso:** Todo o conteúdo deste repositório, incluindo a arquitetura proposta e documentos anexos, é de autoria própria. A reprodução sem os devidos créditos é considerada plágio.
