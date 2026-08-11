@@ -3,6 +3,7 @@ package br.com.qawler.config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +17,21 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    @Value("${qawler.jwt.secret:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}")
+    @Value("${qawler.jwt.secret}")
     private String secretKey;
 
     @Value("${qawler.jwt.expiration:86400000}")
     private long jwtExpirationMs;
+
+    @PostConstruct
+    public void validateSecret() {
+        if (secretKey == null || secretKey.isBlank() || secretKey.length() < 32) {
+            throw new IllegalStateException(
+                "qawler.jwt.secret must be set via environment variable and be at least 32 chars. "
+                + "Generate: openssl rand -hex 32"
+            );
+        }
+    }
 
     public String generateToken(String username) {
         return generateToken(new HashMap<>(), username);

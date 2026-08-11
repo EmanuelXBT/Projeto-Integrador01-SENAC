@@ -49,13 +49,14 @@ server:
   port: ${API_PORT:8080}
 
 # ── JWT ─────────────────────────────────────────────────
-jwt:
-  secret: ${JWT_SECRET:change-me-256-bit-secret-key-here}
-  expiration-ms: 86400000
+qawler:
+  jwt:
+    secret: ${QAWLER_JWT_SECRET}
+    expiration-ms: 86400000
 
 # ── AES-256 ─────────────────────────────────────────────
 aes:
-  secret-key: ${AES_SECRET_KEY:change-me-aes-256-key}
+  secret-key: ${AES_SECRET_KEY}
 
 # ── Crawler ─────────────────────────────────────────────
 crawler:

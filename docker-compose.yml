@@ -50,12 +50,12 @@ services:
       SPRING_RABBITMQ_PORT: 5672
       SPRING_RABBITMQ_USERNAME: ${RABBITMQ_USER:-guest}
       SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASS:-guest}
-      JWT_SECRET: ${JWT_SECRET:-change-me-256-bit-secret-key-here}
+      QAWLER_JWT_SECRET: ${QAWLER_JWT_SECRET}
       SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
       SMTP_PORT: ${SMTP_PORT:-587}
       SMTP_USER: ${SMTP_USER:-}
       SMTP_PASS: ${SMTP_PASS:-}
-      AES_SECRET_KEY: ${AES_SECRET_KEY:-change-me-aes-256-key}
+      AES_SECRET_KEY: ${AES_SECRET_KEY}
     depends_on:
       mysql:
         condition: service_healthy
@@ -76,6 +76,8 @@ services:
       SPRING_RABBITMQ_USERNAME: ${RABBITMQ_USER:-guest}
       SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASS:-guest}
       SELENIUM_HEADLESS: "true"
+      QAWLER_JWT_SECRET: ${QAWLER_JWT_SECRET}
+      AES_SECRET_KEY: ${AES_SECRET_KEY}
     depends_on:
       mysql:
         condition: service_healthy
