@@ -98,9 +98,16 @@ você cria a conta com um e-mail dedicado: `automationexercise.com`, `demoqa.com
 
 ---
 
-## 7. ⚠️ Estado da implementação — o login ainda **não** é usado na varredura
+## 7. ⚠️ Estado da implementação × decisão de projeto (21/09/2026)
 
-Conferido no código em 21/09/2026 (commit `b9455bd`):
+> **Decisão do Emanuel (21/09/2026):** o QAwler **não** vai guardar credenciais.
+> O fluxo definido é o **login assistido** — a aplicação abre uma janela do navegador
+> do usuário, a pessoa faz o login (captcha/2FA inclusive) e **dessa sessão autenticada**
+> o crawler parte, com os resultados aparecendo **dentro da aplicação**.
+> Especificação completa (fluxo, decisões técnicas, critérios de sucesso e etapas):
+> [`docs/LOGIN-ASSISTIDO.md`](./LOGIN-ASSISTIDO.md).
+
+Conferido no código em 21/09/2026 (commit `c26b73c`):
 
 - **Existe:** os campos `credenciais_login`, `credenciais_senha`, `dominios_autorizados`
   e `autorizado_producao` na entidade `Sistema` e no `SistemaRequest` (DTO).
@@ -110,16 +117,7 @@ Conferido no código em 21/09/2026 (commit `b9455bd`):
 - **Consequência prática:** hoje a varredura é **anônima**. Nos alvos da §1 que exigem
   login, o crawler vai parar na tela de autenticação — o que se testa, na prática, é a
   navegação pública e a detecção do *muro de autenticação*, não a sessão autenticada.
-
-Para exercitar de verdade os alvos com login, faltam (na ordem):
-
-1. **Coletar e persistir** as credenciais no cadastro do sistema (`sistemas.html` +
-   `SistemaController`/`SistemaService`), com criptografia AES-256 antes de gravar (RNF).
-2. **Fazer login no Selenium** antes do crawl: localizar usuário/senha, submeter o
-   formulário e **reutilizar a sessão** (cookies) nas páginas seguintes
-   (`CrawlerService.crawl` receber o `Sistema`/credenciais).
-3. **Detecção de captcha/2FA** com **pausa para intervenção humana** (regra de negócio 2)
-   — a página do reCAPTCHA da §2 serve de fixture para essa detecção.
-4. **Tratar HTTP Basic** (§1.9) como tipo de autenticação alternativo.
-5. Respeitar `dominios_autorizados` e `autorizado_producao` (regra 6 — bloqueio de PROD).
+- **Encaminhamento:** implementar o fluxo de `docs/LOGIN-ASSISTIDO.md` (abrir janela com
+  perfil dedicado → anexar o Selenium via CDP → crawl na sessão → achados na aplicação).
+  Os campos `credenciais_*` ficam **depreciados** (sem uso, saem na próxima migração).
 
