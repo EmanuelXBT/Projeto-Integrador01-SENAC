@@ -32,6 +32,7 @@
         .table-dark-custom thead { background: #334155; }
         .table-dark-custom th { color: #94a3b8; font-weight: 500; }
         .badge-queued  { background: #fbbf24; color: #0f172a; }
+        .badge-aguardando-login { background: #a78bfa; color: #0f172a; }
         .badge-running { background: #38bdf8; color: #0f172a; }
         .badge-done    { background: #34d399; color: #0f172a; }
         .badge-failed  { background: #f87171; color: #0f172a; }
@@ -84,6 +85,12 @@
                     <div class="stat-card text-center">
                         <div class="value" style="color:#34d399;" th:text="${stats.completed}">0</div>
                         <div class="label">Concluídos</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card text-center">
+                        <div class="value" style="color:#a78bfa;" th:text="${stats.aguardandoLogin}">0</div>
+                        <div class="label">Aguardando login</div>
                     </div>
                 </div>
                 <div class="col-6 col-md-3">

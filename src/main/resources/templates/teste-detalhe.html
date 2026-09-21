@@ -29,6 +29,7 @@
         .bug-item .severity-medium   { color: #fbbf24; font-weight: 600; }
         .bug-item .severity-low      { color: #94a3b8; font-weight: 600; }
         .badge-queued  { background: #fbbf24; color: #0f172a; }
+        .badge-aguardando-login { background: #a78bfa; color: #0f172a; }
         .badge-running { background: #38bdf8; color: #0f172a; }
         .badge-completed { background: #34d399; color: #0f172a; }
         .badge-failed  { background: #f87171; color: #0f172a; }
@@ -99,6 +100,20 @@
         </div>
     </div>
 
+    <!-- Sessão assistida (login assistido — docs/LOGIN-ASSISTIDO.md) -->
+    <div class="card-custom">
+        <h4 class="section-title">
+            <i class="bi bi-shield-lock me-2"></i>Sessão de login (alvo autenticado)
+        </h4>
+        <p class="text-muted small mb-3">
+            Quando a varredura precisa de uma área autenticada, o teste fica em
+            <span class="badge badge-aguardando-login">AGUARDANDO_LOGIN</span> até você concluir o login
+            na janela aberta na estação. O QAwler <strong>não guarda credenciais</strong> — a sessão é a
+            do navegador.
+        </p>
+        <div class="sessao-assistida" th:attr="data-sistema-id=${teste.sistemaId},data-teste-id=${teste.id}"></div>
+    </div>
+
     <!-- Actions -->
     <div class="d-flex gap-2 mb-4">
         <form th:action="@{/api/testes}" method="post" class="d-inline">
@@ -117,6 +132,7 @@
     </div>
 </div>
 
+<script src="/js/qawler-sessao.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

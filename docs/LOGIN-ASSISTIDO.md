@@ -156,11 +156,31 @@ Emanuel: a **tailnet** — ex.: `100.81.89.63`). Detalhes:
   da rede privada (tailnet), porta efêmera quando possível, encerrar a janela/porta depois
   do crawl e nunca expor na internet. Aviso explícito na tela.
 
-### Helper na estação (proposto)
+### Helper na estação — `tools/qawler-login.sh` (macOS/Linux) e `tools/qawler-login.ps1` (Windows)
 
-Script pequeno (`qawler-login.sh` / atalho no Mac) que: abre o Chrome com o perfil
-dedicado e a porta de debug, imprime o endereço da estação para colar no QAwler e
-encerra tudo com um comando (`qawler-login --stop`).
+```bash
+# M1 — janela na própria máquina do QAwler (endereço da estação em branco)
+./tools/qawler-login.sh --url https://alvo.dev.local/login
+
+# M2 — janela na SUA máquina; o QAwler (em outra) anexa pela rede privada
+./tools/qawler-login.sh --bind 100.81.89.63 --url https://alvo.dev.local/login
+#   → endereço a informar no QAwler: 100.81.89.63:9222
+
+./tools/qawler-login.sh --status   # navegador em execução + aba atual
+./tools/qawler-login.sh --stop     # encerra o navegador do perfil dedicado
+```
+
+Windows (PowerShell):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\qawler-login.ps1 -Url https://alvo.dev.local/login -Bind 100.81.89.63
+powershell -ExecutionPolicy Bypass -File .\tools\qawler-login.ps1 -Status
+powershell -ExecutionPolicy Bypass -File .\tools\qawler-login.ps1 -Stop
+```
+
+O helper **não guarda credenciais**: só abre a janela e a porta de depuração — ligada por
+padrão a `127.0.0.1` (só a própria máquina); use `--bind`/`-Bind` com o IP da rede privada
+para o modo remoto. Opções: `--porta`, `--perfil`, `--navegador`, `--help`.
 
 ---
 
@@ -221,7 +241,7 @@ encerra tudo com um comando (`qawler-login --stop`).
 
 ---
 
-## 9. Verificação da E1 — 21/09/2026
+## 9. Verificação — 21/09/2026 (E1 e E2)
 
 Execução real no container do agente (JDK 21 + Maven, `mvn -B -DskipTests`):
 
@@ -240,14 +260,33 @@ Execução real no container do agente (JDK 21 + Maven, `mvn -B -DskipTests`):
 Dois defeitos foram encontrados e corrigidos por esse teste: `destroy()` não encerrava os
 processos filhos e trocar de sessão (M1 → M2) descartava o processo lançado sem finalizá-lo.
 
+### E2 — helper da estação e telas
+
+- ✅ **Suíte de testes de integração:** `mvn -B test` → **10/10** (H2 em memória + MockMvc,
+  `src/test/java/br/com/qawler/QawlerIntegracaoTest.java`): contexto sobe, `/login` público,
+  API exigindo token e aceitando Bearer, login web com cookie HttpOnly, `/sistemas` com o
+  painel da sessão, `/testes/{id}` com `AGUARDANDO_LOGIN` e bug, fluxo M2 completo
+  (abrir → confirmar → encerrar → 404) e erros 400/409 explicados.
+- ✅ **Helper `tools/qawler-login.sh`** verificado contra CDP simulado: `--help`, `--status`
+  (navegador + aba atual), abertura com os argumentos corretos
+  (`--remote-debugging-port`, `--remote-debugging-address`, `--user-data-dir` dedicado,
+  `--no-first-run`, URL do alvo) e `--stop` encerrando o navegador do perfil (0 sobras).
+- 🐞 **Defeitos encontrados e corrigidos nesta etapa:** (1) `AuthService` ainda lia
+  `jwt.secret` — a aplicação **não subia** depois da renomeação para `qawler.jwt.*`;
+  (2) o helper não lia o JSON do CDP (o heredoc do Python consumia o `stdin`).
+- ⚠️ **Ainda não verificado:** o `ChromeDriver` anexado a um Chrome **real** e a varredura
+  autenticada (E3); a suíte roda com H2 e sem MySQL/RabbitMQ reais.
+
 ---
 
 ## 10. Etapas propostas (uma por vez, com OK)
 
 1. ✅ **E1 — Sessão assistida no backend (concluída em 21/09/2026):** `SessaoAssistidaService`
    (abrir/verificar/anexar) + endpoints + estado `AGUARDANDO_LOGIN`.
-2. **E2 — Helper + UI:** script `qawler-login` (macOS/Linux/Windows) na estação; botões e
-   status ao vivo nas telas `sistemas` e `teste-detalhe`; achados aparecendo na aplicação.
+2. ✅ **E2 — Helper + UI (concluída em 21/09/2026):** `tools/qawler-login.sh` e `.ps1` para a
+   estação (macOS/Linux/Windows), painel da sessão nas telas `sistemas` e `teste-detalhe`,
+   card “Aguardando login” no dashboard, camada web (login por cookie HttpOnly) e a primeira
+   suíte de testes do projeto (10 testes de integração com H2 + MockMvc).
 3. **E3 — Crawl autenticado:** `CrawlerService` aceitando a sessão anexada; detecção de
    muro de login (sessão expirada).
 4. **E4 — Reuso para agendamento (RF-08):** perfil persistente + revalidação de sessão.

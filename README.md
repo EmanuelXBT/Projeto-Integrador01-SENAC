@@ -84,6 +84,26 @@ docker-compose up -d
 # API Docs:  http://localhost:8080/swagger-ui.html
 ```
 
+### Login assistido (alvos que exigem autenticação)
+
+O QAwler **não guarda credenciais**: ele abre uma janela do navegador **na máquina do
+usuário** (a *estação de autenticação*), você faz o login manualmente — captcha e 2FA
+ficam com você — e o crawler varre **naquela sessão**. Detalhes: [`docs/LOGIN-ASSISTIDO.md`](./docs/LOGIN-ASSISTIDO.md).
+
+```bash
+# 1. Na estação (a máquina onde o navegador deve abrir)
+./tools/qawler-login.sh --url https://alvo.dev.local/login          # mesma máquina do QAwler
+./tools/qawler-login.sh --bind 100.x.y.z --url https://alvo.dev.local/login   # outra máquina (rede privada)
+
+# 2. Na aplicação (http://localhost:8080 → telas → Sistemas)
+#    informe o endereço da estação, clique em “Concluí o login” e depois em “Executar Testes”
+
+# 3. Encerrar a sessão de login quando terminar
+./tools/qawler-login.sh --stop
+```
+
+Windows: `powershell -ExecutionPolicy Bypass -File .\tools\qawler-login.ps1 -Url <url> [-Bind <ip>]`.
+
 ### Pré-requisitos
 
 - Docker 24+ e docker-compose 2+
@@ -109,10 +129,11 @@ docker-compose up -d
 - [x] Docker Compose (API + MySQL + RabbitMQ + Worker) — arquivo pronto, ainda não exercitado
 - [x] **Build validado:** `mvn -DskipTests package` → BUILD SUCCESS (21/09/2026)
 - [x] **Login assistido — E1 (backend):** sessão assistida (`/api/sistemas/{id}/sessao/*`), estado `AGUARDANDO_LOGIN`, modos local (M1) e estação remota (M2) — ver [`docs/LOGIN-ASSISTIDO.md`](./docs/LOGIN-ASSISTIDO.md)
-- [ ] Login assistido — E2: helper `qawler-login` na estação + telas (abrir janela, “Concluí o login”, testar conexão)
+- [x] **Login assistido — E2:** helper `qawler-login` (shell com `--bind/--status/--stop` + PowerShell) e telas com painel da sessão (abrir janela, testar conexão, “Concluí o login”, encerrar)
+- [x] **Camada web:** login por cookie HttpOnly + telas `/sistemas`, `/dashboard`, `/testes/{id}` renderizando dados reais
+- [x] **Testes de integração:** 10 testes (H2 + MockMvc) — `mvn test`
 - [ ] Login assistido — E3: varredura anexada à sessão autenticada
 - [ ] Execução ponta-a-ponta validada (app + MySQL + RabbitMQ + alvo real)
-- [ ] Testes automatizados
 
 ### Etapa 3 📅 — Entrega e Apresentação
 - [ ] Testes automatizados

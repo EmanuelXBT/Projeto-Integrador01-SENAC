@@ -34,6 +34,8 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/public/**").permitAll()
                 .requestMatchers("/actuator/health").permitAll()
+                // Telas públicas: a página de login e os estáticos (o token vai em cookie HttpOnly).
+                .requestMatchers("/login", "/logout", "/js/**", "/css/**", "/favicon.ico").permitAll()
                 .anyRequest().authenticated())
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 

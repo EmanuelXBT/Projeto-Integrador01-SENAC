@@ -30,8 +30,8 @@ public class AuthService {
     // Replace with real UsuarioRepository when the entity layer is built
     // private final UsuarioRepository usuarioRepository;
 
-    public AuthService(@Value("${jwt.secret}") String secret,
-                       @Value("${jwt.expiration-ms}") long expirationMs,
+    public AuthService(@Value("${qawler.jwt.secret}") String secret,
+                       @Value("${qawler.jwt.expiration-ms:86400000}") long expirationMs,
                        PasswordEncoder passwordEncoder /*, UsuarioRepository usuarioRepository */) {
         this.signingKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
         this.expirationMs = expirationMs;
