@@ -64,7 +64,18 @@ crawler:
   timeout-seconds: 30
   user-agent: "QAwler/1.0 (QA Crawler; +https://github.com/EmanuelXBT/Projeto-Integrador01-SENAC)"
   headless: ${SELENIUM_HEADLESS:true}
-  chromium-path: ${CHROMIUM_PATH:/usr/bin/chromium}
+  # Vazio = o Selenium Manager resolve o navegador do sistema (portabilidade macOS/Windows/Linux).
+  # Só preencha para forçar um binário específico.
+  chromium-path: ${CHROMIUM_PATH:}
+
+  # ── Login assistido (docs/LOGIN-ASSISTIDO.md) ──────────
+  assistido:
+    habilitado: ${QAWLER_ASSISTIDO:true}
+    # Perfil DEDICADO (nunca o perfil pessoal do usuário).
+    perfil: ${QAWLER_PERFIL:${user.home}/.qawler/chrome-profile}
+    porta: ${QAWLER_PORTA_CDP:9222}
+    binario: ${QAWLER_CHROME_BIN:}
+    timeout-conexao-ms: 8000
 
 # ── Logging ─────────────────────────────────────────────
 logging:

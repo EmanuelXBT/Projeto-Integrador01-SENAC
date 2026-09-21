@@ -1,6 +1,6 @@
 # 🕷️ QAwler — Projeto Integrador I · SENAC
 
-> ⚠️ **Etapa 2 de 3 — Desenvolvimento** O código-fonte está em implementação ativa. Veja o [Roadmap](#-roadmap) para detalhes.
+> ⚠️ **Etapa 2 de 3 — Desenvolvimento.** Código implementado e **build validado** (`mvn -DskipTests package`, 21/09/2026). Em andamento: execução ponta-a-ponta (MySQL/RabbitMQ) e o **login assistido** — ver [`docs/LOGIN-ASSISTIDO.md`](./docs/LOGIN-ASSISTIDO.md).
 
 > **Varredura automatizada de QA para ambientes web · Java 17 + Spring Boot + MySQL + Selenium**
 
@@ -10,7 +10,7 @@
 [![Selenium](https://img.shields.io/badge/Selenium-4.x-%2343B02A?logo=selenium&logoColor=white)](https://www.selenium.dev/)
 [![Docker](https://img.shields.io/badge/Docker-✓-%232496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![Status](https://img.shields.io/badge/Etapa-1_de_3_(Planejamento)-blue)](https://github.com/EmanuelXBT/Projeto-Integrador01-SENAC#-roadmap)
+[![Status](https://img.shields.io/badge/Etapa-2_de_3_(Desenvolvimento)-orange)](https://github.com/EmanuelXBT/Projeto-Integrador01-SENAC#-roadmap)
 
 ---
 
@@ -21,6 +21,8 @@
 A grande inovação está na geração de **relatórios em JSON estruturado de baixo nível**, projetados para serem consumidos por ferramentas automatizadas de análise. Empresas podem anexar esses relatórios como documento adicional em seus fluxos de trabalho, permitindo que sistemas externos interpretem e auxiliem na correção dos bugs identificados.
 
 > *"Um erro é detectado, documentado e contextualizado em formato legível por máquina — eliminando a necessidade de relatórios manuais extensos."*
+
+Na **revisão v2 do escopo (Etapa 2)**, o QAwler passa a ser organizado por **sistemas monitorados** (cadastro de alvos, testes, agendamentos e relatórios por sistema) e inclui a **varredura de áreas autenticadas por login assistido**: a aplicação abre a janela do navegador **na máquina do usuário** (a estação de autenticação), a pessoa faz o login — inclusive captcha/2FA — e o crawler segue **naquela sessão**, sem armazenar credenciais. Especificação: [`docs/LOGIN-ASSISTIDO.md`](./docs/LOGIN-ASSISTIDO.md).
 
 ---
 
@@ -98,12 +100,19 @@ docker-compose up -d
 - [x] Modelagem do banco de dados (DER)
 - [x] Stack tecnológica definida
 
-### Etapa 2 🔜 — Desenvolvimento
-- [ ] API REST com Spring Boot
-- [ ] Implementação dos scanners (HTTP, JS, Imagens)
-- [ ] Frontend Thymeleaf + Bootstrap
-- [ ] Integração Selenium + Chromium headless
-- [ ] Docker Compose funcional
+### Etapa 2 🔄 — Desenvolvimento *(atual)*
+- [x] API REST com Spring Boot (controllers, DTOs, autenticação JWT)
+- [x] Modelo de dados em JPA (8 entidades + repositórios)
+- [x] Implementação dos scanners (HTTP, JS, imagens quebradas)
+- [x] Frontend Thymeleaf + Bootstrap (5 telas)
+- [x] Integração Selenium + navegador headless (código; execução ponta-a-ponta ainda não validada)
+- [x] Docker Compose (API + MySQL + RabbitMQ + Worker) — arquivo pronto, ainda não exercitado
+- [x] **Build validado:** `mvn -DskipTests package` → BUILD SUCCESS (21/09/2026)
+- [x] **Login assistido — E1 (backend):** sessão assistida (`/api/sistemas/{id}/sessao/*`), estado `AGUARDANDO_LOGIN`, modos local (M1) e estação remota (M2) — ver [`docs/LOGIN-ASSISTIDO.md`](./docs/LOGIN-ASSISTIDO.md)
+- [ ] Login assistido — E2: helper `qawler-login` na estação + telas (abrir janela, “Concluí o login”, testar conexão)
+- [ ] Login assistido — E3: varredura anexada à sessão autenticada
+- [ ] Execução ponta-a-ponta validada (app + MySQL + RabbitMQ + alvo real)
+- [ ] Testes automatizados
 
 ### Etapa 3 📅 — Entrega e Apresentação
 - [ ] Testes automatizados

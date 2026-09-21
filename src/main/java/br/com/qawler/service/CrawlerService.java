@@ -37,7 +37,7 @@ public class CrawlerService {
                           @Value("${crawler.timeout-seconds:30}") int timeoutSeconds,
                           @Value("${crawler.user-agent:QAwler/1.0}") String userAgent,
                           @Value("${crawler.headless:true}") boolean headless,
-                          @Value("${crawler.chromium-path:/usr/bin/chromium}") String chromiumPath) {
+                          @Value("${crawler.chromium-path:}") String chromiumPath) {
         this.scannerService = scannerService;
         this.maxDepth = maxDepth;
         this.timeout = Duration.ofSeconds(timeoutSeconds);
@@ -130,7 +130,11 @@ public class CrawlerService {
         options.addArguments("--disable-gpu");
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--user-agent=" + userAgent);
-        options.setBinary(chromiumPath);
+        // Portabilidade: sem caminho fixo de binário, o Selenium Manager resolve o
+        // navegador do sistema (macOS/Windows/Linux). Ver crawler.chromium-path.
+        if (chromiumPath != null && !chromiumPath.isBlank()) {
+            options.setBinary(chromiumPath);
+        }
 
         // Enable browser logging for JS scanner
         options.setExperimentalOption("goog:loggingPrefs",

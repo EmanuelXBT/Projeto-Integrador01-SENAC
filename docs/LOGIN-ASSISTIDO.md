@@ -23,6 +23,10 @@ vendo as páginas e os defeitos aparecerem na aplicação.
 **Fora de escopo (v0.1):** gravar credenciais; fazer login automático por formulário;
 importar sessão de outro navegador/perfil; agendar varredura de alvo **nunca** autenticado.
 
+**Requisito de portabilidade:** a aplicação deve ser **instalável e funcional em qualquer
+máquina** que atenda aos requisitos mínimos (Java 17+ e os serviços de apoio) — nenhuma
+decisão pode depender de um computador específico (ver §5 e §8).
+
 ---
 
 ## 2. Fluxo
@@ -190,29 +194,60 @@ encerra tudo com um comando (`qawler-login --stop`).
 
 ---
 
-## 8. Perguntas abertas (preciso da sua decisão)
+## 8. Decisões tomadas (21/09/2026) e o que continua aberto
 
-1. **Qual é a topologia?** Onde fica o QAwler e onde fica a estação — por exemplo QAwler
-   no Mac + estação no Mac (M1), ou QAwler na devbox/Umbrel + estação no Mac (M2)? E no
-   M2, a conexão deve ser **porta CDP na tailnet** (simples) ou **túnel SSH reverso**
-   (nada exposto, mais restrito)?
-2. **Navegador:** Chrome (recomendado — mesmo binário que você usa, com perfil dedicado
-   do QAwler) ou Firefox?
-3. **Fim do login:** botão **“Concluí o login”** (simples e à prova de SPA) ou detecção
-   automática (some o formulário / muda a URL) — ou automática com o botão como escape?
-4. **Campos de credencial do cadastro:** depreciar agora (recomendado, coerente com a
-   decisão) ou manter só como anotação no cadastro?
-5. **Escopo da v0.1:** só o fluxo manual (abrir → logar → varrer) ou já incluir o
-   reaproveitamento de sessão para **agendamento** (RF-08)?
+**Decidido pelo Emanuel:**
+1. **Topologia: os dois modos (M1 e M2)** — princípio maior: *a aplicação deve ser
+   **instalável e funcional em qualquer máquina** que atenda aos requisitos mínimos*.
+   Logo, nada depende de uma máquina específica: o **endereço da estação** é um campo do
+   sistema (vazio/`localhost` = M1; preenchido = M2).
+2. **Navegador: Chrome** (binário do sistema, perfil dedicado do QAwler).
+3. **Fim do login: botão “Concluí o login” + detecção automática como reforço.**
+4. **E1 autorizada** (implementação iniciada em 21/09).
+5. **Push liberado** — condicionado à atualização do roadmap do `README`/`CHANGELOG` antes.
+
+**Requisito de portabilidade (decorrência direta da decisão 1):**
+- Nada de caminho fixo de binário: `crawler.chromium-path` passa a ser **opcional** —
+  quando vazio, o Selenium Manager resolve o navegador do sistema (macOS/Windows/Linux).
+- O helper de estação (`qawler-login`) tem de existir para macOS, Linux e Windows (script
+  `.sh` + `.ps1`/`.bat`), detectando o binário do Chrome por SO.
+- O modo assistido só exige: (a) Chrome instalado na **estação**; (b) rede entre estação e
+  servidor. A aplicação roda onde houver Java 17+ e os serviços de apoio (MySQL/RabbitMQ).
+
+**Continua aberto (decido com você depois):**
+- M2 na tailnet direta (porta 9222) **ou** túnel SSH reverso — a implementação suporta os
+  dois (o endereço da estação pode ser `127.0.0.1:9222` de um túnel ou `<host>:9222`).
+- Reuso de sessão para **agendamento** (RF-08) — previsto para a E4.
 
 ---
 
-## 9. Etapas propostas (uma por vez, com OK)
+## 9. Verificação da E1 — 21/09/2026
 
-1. **E1 — Sessão assistida no backend:** `SessaoAssistidaService` (abrir/verificar/anexar)
-   + endpoints + estado `AGUARDANDO_LOGIN`.
-2. **E2 — UI:** botões e status ao vivo nas telas `sistemas` e `teste-detalhe`;
-   achados aparecendo na aplicação.
+Execução real no container do agente (JDK 21 + Maven, `mvn -B -DskipTests`):
+
+- ✅ **Build:** `compile` e `package` → BUILD SUCCESS; `target/qawler-0.1.0-SNAPSHOT.jar` gerado.
+- ✅ **Harness funcional** (`/opt/data/scripts/smoke_e1/` — 21 checagens, com endpoint CDP
+  simulado em `127.0.0.1:9233` e um navegador falso que registra os argumentos):
+  ping de `/json/version`, leitura da aba em `/json/list`, comando de lançamento
+  (`--remote-debugging-port`, `--user-data-dir` dedicado, URL base), decisão M1×M2,
+  `confirmar()`, erros 400/409 explicados e **ausência de processo órfão** após trocar a
+  sessão. Resultado: **21/21**.
+- ⚠️ **Não verificado aqui:** não existe Chrome no container do agente, portanto o
+  `ChromeDriver` **anexado** (`debuggerAddress`) e a varredura autenticada real ainda **não**
+  foram exercitados — o harness usa um CDP simulado. Essa validação acontece na máquina com
+  navegador (E3). A aplicação também não subiu (sem MySQL/RabbitMQ neste ambiente).
+
+Dois defeitos foram encontrados e corrigidos por esse teste: `destroy()` não encerrava os
+processos filhos e trocar de sessão (M1 → M2) descartava o processo lançado sem finalizá-lo.
+
+---
+
+## 10. Etapas propostas (uma por vez, com OK)
+
+1. ✅ **E1 — Sessão assistida no backend (concluída em 21/09/2026):** `SessaoAssistidaService`
+   (abrir/verificar/anexar) + endpoints + estado `AGUARDANDO_LOGIN`.
+2. **E2 — Helper + UI:** script `qawler-login` (macOS/Linux/Windows) na estação; botões e
+   status ao vivo nas telas `sistemas` e `teste-detalhe`; achados aparecendo na aplicação.
 3. **E3 — Crawl autenticado:** `CrawlerService` aceitando a sessão anexada; detecção de
    muro de login (sessão expirada).
 4. **E4 — Reuso para agendamento (RF-08):** perfil persistente + revalidação de sessão.
