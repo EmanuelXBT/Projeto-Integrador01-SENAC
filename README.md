@@ -57,6 +57,7 @@ Um **crawler inteligente** que:
 | [`docs/REQUISITOS.md`](./docs/REQUISITOS.md) | Requisitos funcionais (RF-01 a RF-17) e não funcionais (RNF-01 a RNF-11) |
 | [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) | Diagrama de arquitetura, módulos, stack, DER, regras de negócio, schema JSON |
 | [`docs/DER.md`](./docs/DER.md) | Diagrama Entidade-Relacionamento completo — 8 tabelas, colunas, tipos, índices |
+| [`docs/AMBIENTES-DE-TESTE.md`](./docs/AMBIENTES-DE-TESTE.md) | Ambientes com autenticação para testar o QAwler (públicos verificados, fixtures de defeito, ambiente próprio) |
 | [`CONTRIBUTING.md`](./CONTRIBUTING.md) | Guia de contribuição, padrões de commit, setup local |
 
 ---
