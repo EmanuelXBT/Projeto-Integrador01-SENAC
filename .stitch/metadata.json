@@ -1,0 +1,66 @@
+{
+  "projeto": {
+    "projectId": "9770563991880524861",
+    "titulo": "QAwler",
+    "plataforma": "Google Stitch (MCP oficial)"
+  },
+  "designSystem": {
+    "assetId": "a973402662734980b442c98b016ca473",
+    "nome": "QAwler Technical System",
+    "tema": "escuro",
+    "fonte": "Inter + JetBrains Mono",
+    "destaque": "#22D3EE"
+  },
+  "telas": [
+    {
+      "ordem": 1,
+      "id": "fe83a2b4d3a84b2f99b5b5c41a604625",
+      "nome": "Login",
+      "arquivo": "screens/01_login.png",
+      "html": "screens/01_login.html"
+    },
+    {
+      "ordem": 2,
+      "id": "45daf8d08c0947688a2b1fbcec84275b",
+      "nome": "Dashboard",
+      "arquivo": "screens/02_dashboard.png",
+      "html": "screens/02_dashboard.html"
+    },
+    {
+      "ordem": 3,
+      "id": "10a227214f9d4033b285d0b45c68d130",
+      "nome": "Sistemas monitorados",
+      "arquivo": "screens/03_sistemas.png",
+      "html": "screens/03_sistemas.html"
+    },
+    {
+      "ordem": 4,
+      "id": "cf76e34ee69d411f90c57751abcade2e",
+      "nome": "Detalhe do teste",
+      "arquivo": "screens/04_detalhe.png",
+      "html": "screens/04_detalhe.html"
+    },
+    {
+      "ordem": 5,
+      "id": "9c5524b1f012458b9194bfaa298ad086",
+      "nome": "Relatório",
+      "arquivo": "screens/05_relatorio.png",
+      "html": "screens/05_relatorio.html"
+    }
+  ],
+  "visaoGeral": "screens/00_visao_geral.png",
+  "figma": {
+    "fileKey": "vChq2ocLkh97zAkq2IZJtK",
+    "url": "https://www.figma.com/design/vChq2ocLkh97zAkq2IZJtK",
+    "paginas": [
+      "Telas",
+      "Sistema de Design",
+      "Fluxo"
+    ]
+  },
+  "documentos": {
+    "designMd": ".stitch/DESIGN.md",
+    "especificacao": "docs/design-interface-qawler-v2.md"
+  },
+  "atualizadoEm": "2026-09-21"
+}

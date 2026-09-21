@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QAwler — Autenticação</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error": "#ffb4ab",
+            "branco-neblina": "#E5EAF2",
+            "on-error": "#690005",
+            "surface-bright": "#353940",
+            "azul-noite-absoluto": "#0A0E14",
+            "on-surface": "#dfe2eb",
+            "verde-menta": "#34D399",
+            "on-surface-variant": "#bbc9cd",
+            "inverse-on-surface": "#2d3137",
+            "on-tertiary-fixed": "#2a1800",
+            "secondary-container": "#3e4756",
+            "on-tertiary-fixed-variant": "#643f00",
+            "ambar": "#FBBF24",
+            "tertiary-fixed-dim": "#ffb957",
+            "borda-sutil": "#2A3446",
+            "on-tertiary": "#462b00",
+            "secondary": "#bec7d8",
+            "borda-campo": "#606E8E",
+            "azul-selecao": "#1E3A5F",
+            "borda-media": "#3A4557",
+            "primary-container": "#22d3ee",
+            "primary-fixed-dim": "#2fd9f4",
+            "grade-tabela": "#212B3B",
+            "outline": "#859397",
+            "cinza-azulado-claro": "#A6AEC2",
+            "tertiary-container": "#ffb13b",
+            "outline-variant": "#3c494c",
+            "surface": "#10141a",
+            "on-secondary-container": "#acb6c7",
+            "linha-alternada": "#172030",
+            "on-background": "#dfe2eb",
+            "ardosia-elevada": "#1B2431",
+            "surface-container-highest": "#31353c",
+            "surface-container-high": "#262a31",
+            "coral": "#F87171",
+            "error-container": "#93000a",
+            "surface-container": "#1c2026",
+            "on-secondary": "#28313e",
+            "on-primary-container": "#005763",
+            "on-primary": "#00363e",
+            "background": "#10141a",
+            "azul-noite-barra": "#101722",
+            "alta-severidade": "#FB923C",
+            "tertiary-fixed": "#ffddb5",
+            "secondary-fixed": "#dae3f5",
+            "ciano-tecnico": "#22D3EE",
+            "surface-dim": "#10141a",
+            "on-error-container": "#ffdad6",
+            "inverse-surface": "#dfe2eb",
+            "azul-informativo": "#60A5FA",
+            "on-primary-fixed": "#001f25",
+            "surface-variant": "#31353c",
+            "ardosia-profunda": "#141B26",
+            "on-tertiary-container": "#6e4600",
+            "secondary-fixed-dim": "#bec7d8",
+            "primary-fixed": "#a2eeff",
+            "on-secondary-fixed": "#131c29",
+            "surface-container-lowest": "#0a0e14",
+            "ciano-profundo": "#06272E",
+            "tertiary": "#ffd6a3",
+            "primary": "#8aebff",
+            "surface-container-low": "#181c22",
+            "inverse-primary": "#006877",
+            "on-primary-fixed-variant": "#004e5a",
+            "surface-tint": "#2fd9f4",
+            "cinza-azulado-apagado": "#7C8799",
+            "on-secondary-fixed-variant": "#3e4756"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-sm": "12px",
+            "margin": "24px",
+            "space-xxl": "48px",
+            "space-md": "16px",
+            "space-xl": "32px",
+            "space-lg": "24px",
+            "gutter": "16px",
+            "space-xs": "8px"
+          },
+          "fontFamily": {
+            "body-medium": ["Inter"],
+            "body": ["Inter"],
+            "technical-mono": ["JetBrains Mono"],
+            "page-title": ["Inter"],
+            "table-header": ["Inter"],
+            "section-title": ["Inter"],
+            "table-cell": ["Inter"],
+            "metadata": ["Inter"]
+          },
+          "fontSize": {
+            "body-medium": ["14px", { "lineHeight": "1.45", "fontWeight": "500" }],
+            "body": ["14px", { "lineHeight": "1.45", "fontWeight": "400" }],
+            "technical-mono": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+            "page-title": ["22px", { "lineHeight": "1.3", "fontWeight": "600" }],
+            "table-header": ["12px", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "section-title": ["15px", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "table-cell": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+            "metadata": ["12px", { "lineHeight": "1.4", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body class="bg-azul-noite-absoluto text-branco-neblina font-body min-h-screen flex flex-col justify-between items-center p-4 selection:bg-ciano-tecnico selection:text-ciano-profundo">
+<!-- Top bar status indicator anchor -->
+<!-- Central Authentication Card -->
+<main class="w-full flex-1 flex items-center justify-center py-6">
+<div class="w-full max-w-[420px] bg-ardosia-profunda rounded-xl border border-borda-sutil p-8 shadow-none transition-colors duration-150">
+<!-- Brand & Header -->
+<div class="mb-space-lg text-left">
+<div class="flex items-center gap-space-xs mb-space-md">
+<div class="w-8 h-8 rounded-lg bg-azul-noite-barra border border-borda-sutil flex items-center justify-center text-ciano-tecnico">
+<span class="material-symbols-outlined text-ciano-tecnico" data-icon="radar">radar</span>
+</div>
+<span class="font-page-title text-page-title text-branco-neblina tracking-tight">QAwler</span>
+<span class="ml-1 px-1.5 py-0.5 rounded bg-borda-sutil text-cinza-azulado-claro font-technical-mono text-metadata">v1.0</span>
+</div>
+<h1 class="font-page-title text-page-title text-branco-neblina mb-1">Entrar na sua conta</h1>
+<p class="font-body text-body text-cinza-azulado-claro">Acesse o painel de testes e inspeção contínua</p>
+</div>
+<!-- Real Error State Simulation -->
+<!-- Authentication Form -->
+<form class="space-y-space-md" onsubmit="event.preventDefault();">
+<!-- Field: E-mail -->
+<div class="space-y-1 text-left">
+<div class="flex justify-between items-center">
+<label class="font-body-medium text-body-medium text-branco-neblina" for="email-input">E-mail</label>
+<span class="font-metadata text-metadata text-cinza-azulado-apagado">Corporativo</span>
+</div>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-cinza-azulado-apagado pointer-events-none material-symbols-outlined" data-icon="mail">mail</span>
+<input class="w-full h-10 bg-azul-noite-barra text-branco-neblina placeholder-cinza-azulado-apagado border border-borda-campo rounded-lg pl-9 pr-3 font-technical-mono text-technical-mono focus:outline-none focus:border-ciano-tecnico focus:ring-1 focus:ring-ciano-tecnico transition-colors duration-150" id="email-input" name="email" placeholder="dev@empresa.com.br" required="" type="email" value="qa.lead@empresa.com.br"/>
+</div>
+</div>
+<!-- Field: Senha -->
+<div class="space-y-1 text-left">
+<div class="flex justify-between items-center">
+<label class="font-body-medium text-body-medium text-branco-neblina" for="password-input">Senha</label>
+<span class="font-metadata text-metadata text-cinza-azulado-apagado">mínimo 8 caracteres</span>
+</div>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-cinza-azulado-apagado pointer-events-none material-symbols-outlined" data-icon="key">key</span>
+<input class="w-full h-10 bg-azul-noite-barra text-branco-neblina placeholder-cinza-azulado-apagado border border-borda-campo rounded-lg pl-9 pr-10 font-technical-mono text-technical-mono focus:outline-none focus:border-ciano-tecnico focus:ring-1 focus:ring-ciano-tecnico transition-colors duration-150" id="password-input" name="password" placeholder="••••••••••••" required="" type="password"/>
+<button aria-label="Alternar visualização da senha" class="absolute right-2.5 p-1 text-cinza-azulado-apagado hover:text-ciano-tecnico transition-colors duration-150 rounded flex items-center justify-center" id="toggle-password-btn" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined" data-icon="visibility" id="password-toggle-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Checkbox: Lembrar sessão -->
+<div class="flex items-center gap-2 pt-0.5">
+<input class="w-4 h-4 rounded bg-azul-noite-barra border-borda-campo text-ciano-tecnico focus:ring-0 focus:ring-offset-0 focus:border-ciano-tecnico transition-colors" id="remember-device" name="remember" type="checkbox"/>
+<label class="font-body text-body text-cinza-azulado-claro select-none cursor-pointer" for="remember-device">
+            Lembrar esta máquina por 30 dias
+          </label>
+</div>
+<!-- Primary Action -->
+<div class="pt-1">
+<button class="w-full h-10 bg-primary-container hover:bg-primary-fixed-dim text-ciano-profundo font-body-medium text-body-medium rounded-lg flex items-center justify-center gap-2 transition-colors duration-150 cursor-pointer active:scale-[0.99]" type="submit">
+<span>Entrar</span>
+<span class="material-symbols-outlined font-semibold" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</form>
+<!-- Secondary Links -->
+<div class="flex justify-between items-center pt-space-md mt-space-sm border-t border-grade-tabela font-body text-metadata">
+<a class="text-cinza-azulado-claro hover:text-ciano-tecnico transition-colors duration-150" href="#recuperar-senha">
+          Esqueci minha senha
+        </a>
+<div class="flex items-center gap-1">
+<span class="text-cinza-azulado-apagado">Novo no QAwler?</span>
+<a class="text-ciano-tecnico hover:underline transition-colors duration-150 font-body-medium" href="#registro">
+            Criar conta
+          </a>
+</div>
+</div>
+</div>
+</main>
+<!-- Technical Operational Footer -->
+<footer class="w-full max-w-[1200px] mx-auto py-space-sm px-2 flex flex-col md:flex-row justify-between items-center gap-2 text-metadata text-cinza-azulado-apagado font-technical-mono">
+<div class="flex items-center gap-2"><span>QAwler · v1.0</span></div>
+<div class="flex items-center gap-4">
+<a class="hover:text-ciano-tecnico transition-colors" href="#termos">Termos</a>
+<a class="hover:text-ciano-tecnico transition-colors" href="#privacidade">Privacidade</a>
+<a class="hover:text-ciano-tecnico transition-colors" href="#suporte">Suporte Técnico</a>
+</div>
+</footer>
+<!-- Simple password toggle micro-interaction -->
+<script>
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('password-input');
+      const iconSpan = document.getElementById('password-toggle-icon');
+      
+      if (!passwordInput || !iconSpan) return;
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        iconSpan.textContent = 'visibility_off';
+        iconSpan.setAttribute('data-icon', 'visibility_off');
+      } else {
+        passwordInput.type = 'password';
+        iconSpan.textContent = 'visibility';
+        iconSpan.setAttribute('data-icon', 'visibility');
+      }
+    }
+  </script>
+</body></html>

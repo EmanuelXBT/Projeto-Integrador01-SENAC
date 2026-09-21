@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QAwler - Painel de Controle Operacional</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tipografias: Inter e JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "azul-informativo": "#60A5FA",
+            "coral": "#F87171",
+            "surface-tint": "#2fd9f4",
+            "primary-fixed": "#a2eeff",
+            "on-surface-variant": "#bbc9cd",
+            "inverse-surface": "#dfe2eb",
+            "on-tertiary-fixed": "#2a1800",
+            "on-primary-fixed-variant": "#004e5a",
+            "cinza-azulado-apagado": "#7C8799",
+            "background": "#10141a",
+            "surface-bright": "#353940",
+            "secondary-fixed-dim": "#bec7d8",
+            "secondary-container": "#3e4756",
+            "on-secondary-fixed-variant": "#3e4756",
+            "on-secondary": "#28313e",
+            "error": "#ffb4ab",
+            "ciano-profundo": "#06272E",
+            "primary": "#8aebff",
+            "cinza-azulado-claro": "#A6AEC2",
+            "on-primary-fixed": "#001f25",
+            "secondary-fixed": "#dae3f5",
+            "on-secondary-fixed": "#131c29",
+            "inverse-on-surface": "#2d3137",
+            "on-secondary-container": "#acb6c7",
+            "on-error": "#690005",
+            "outline": "#859397",
+            "on-tertiary-container": "#6e4600",
+            "on-tertiary": "#462b00",
+            "on-primary": "#00363e",
+            "linha-alternada": "#172030",
+            "ambar": "#FBBF24",
+            "branco-neblina": "#E5EAF2",
+            "ciano-tecnico": "#22D3EE",
+            "azul-selecao": "#1E3A5F",
+            "surface-dim": "#10141a",
+            "error-container": "#93000a",
+            "borda-media": "#3A4557",
+            "verde-menta": "#34D399",
+            "on-primary-container": "#005763",
+            "grade-tabela": "#212B3B",
+            "on-background": "#dfe2eb",
+            "borda-campo": "#606E8E",
+            "surface-container-lowest": "#0a0e14",
+            "surface-container-low": "#181c22",
+            "alta-severidade": "#FB923C",
+            "tertiary-fixed-dim": "#ffb957",
+            "azul-noite-absoluto": "#0A0E14",
+            "ardosia-profunda": "#141B26",
+            "borda-sutil": "#2A3446",
+            "surface-container-high": "#262a31",
+            "tertiary-fixed": "#ffddb5",
+            "primary-container": "#22d3ee",
+            "on-error-container": "#ffdad6",
+            "surface-container": "#1c2026",
+            "surface-container-highest": "#31353c",
+            "on-tertiary-fixed-variant": "#643f00",
+            "ardosia-elevada": "#1B2431",
+            "tertiary-container": "#ffb13b",
+            "secondary": "#bec7d8",
+            "primary-fixed-dim": "#2fd9f4",
+            "tertiary": "#ffd6a3",
+            "surface-variant": "#31353c",
+            "surface": "#10141a",
+            "on-surface": "#dfe2eb",
+            "outline-variant": "#3c494c",
+            "inverse-primary": "#006877",
+            "azul-noite-barra": "#101722"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem",
+            "card": "10px",
+            "botao": "6px"
+          },
+          "spacing": {
+            "space-xxl": "48px",
+            "space-sm": "12px",
+            "space-md": "16px",
+            "space-xs": "8px",
+            "space-lg": "24px",
+            "gutter": "16px",
+            "space-xl": "32px",
+            "margin": "24px"
+          },
+          "fontFamily": {
+            "metadata": ["Inter", "sans-serif"],
+            "body-medium": ["Inter", "sans-serif"],
+            "technical-mono": ["JetBrains Mono", "monospace"],
+            "table-header": ["Inter", "sans-serif"],
+            "section-title": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "table-cell": ["Inter", "sans-serif"],
+            "page-title": ["Inter", "sans-serif"]
+          },
+          "fontSize": {
+            "metadata": ["12px", { "lineHeight": "1.4", "fontWeight": "400" }],
+            "body-medium": ["14px", { "lineHeight": "1.45", "fontWeight": "500" }],
+            "technical-mono": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+            "table-header": ["12px", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "section-title": ["15px", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "body": ["14px", { "lineHeight": "1.45", "fontWeight": "400" }],
+            "table-cell": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+            "page-title": ["22px", { "lineHeight": "1.3", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    @keyframes pulse-cyan {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.92); }
+    }
+    .status-pulse {
+      animation: pulse-cyan 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+<body class="bg-azul-noite-absoluto text-branco-neblina font-body text-body min-h-screen flex flex-col antialiased selection:bg-azul-selecao selection:text-ciano-tecnico">
+<!-- BARRA SUPERIOR FIXA (TopNavBar) -->
+<header class="sticky top-0 z-40 w-full h-16 bg-azul-noite-barra border-b border-borda-sutil">
+<div class="w-full max-w-[1200px] mx-auto px-margin h-full flex items-center justify-between">
+<!-- Lado Esquerdo: Marca & Navegação Primária -->
+<div class="flex items-center gap-space-lg">
+<!-- Logotipo Técnico -->
+<a class="flex items-center gap-space-xs text-branco-neblina hover:text-ciano-tecnico transition-colors duration-150" href="#">
+<div class="w-7 h-7 rounded-[6px] bg-ardosia-elevada border border-borda-media flex items-center justify-center text-ciano-tecnico">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</div>
+<span class="font-page-title text-page-title tracking-tight text-branco-neblina">QAwler</span>
+<span class="font-technical-mono text-[11px] px-1.5 py-0.5 rounded bg-surface-container-highest border border-borda-sutil text-cinza-azulado-apagado tracking-normal">v2.4</span>
+</a>
+<!-- Links de Navegação com Indicador Técnico -->
+<nav class="hidden md:flex items-center gap-space-md h-16">
+<a class="h-full flex items-center text-ciano-tecnico border-b-2 border-ciano-tecnico px-1 text-body-medium font-body-medium transition-colors duration-150" href="#">
+            Painel Geral
+          </a>
+<a class="h-full flex items-center text-cinza-azulado-claro hover:text-ciano-tecnico px-1 font-body text-body transition-colors duration-150" href="#">
+            Sistemas
+          </a>
+<a class="h-full flex items-center text-cinza-azulado-claro hover:text-ciano-tecnico px-1 font-body text-body transition-colors duration-150" href="#">
+            Testes
+          </a>
+<a class="h-full flex items-center text-cinza-azulado-claro hover:text-ciano-tecnico px-1 font-body text-body transition-colors duration-150" href="#">
+            Relatórios
+          </a>
+</nav>
+</div>
+<!-- Lado Direito: Ações Secundárias e Menu do Usuário -->
+<div class="flex items-center gap-space-md">
+<!-- Indicador de Infraestrutura de Nuvem -->
+<div class="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-[6px] bg-ardosia-profunda border border-borda-sutil">
+<span class="w-2 h-2 rounded-full bg-verde-menta"></span>
+<span class="font-technical-mono text-metadata text-cinza-azulado-apagado">Cluster: sp-01</span>
+</div>
+<!-- Menu de Perfil / Usuário -->
+<div class="flex items-center gap-space-sm pl-2 border-l border-borda-sutil">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-[6px] bg-surface-container-highest border border-borda-media flex items-center justify-center text-ciano-tecnico font-technical-mono text-body-medium">
+              LQ
+            </div>
+<div class="hidden sm:flex flex-col text-left">
+<div class="flex items-center gap-1.5 leading-none">
+<span class="font-body-medium text-[13px] text-branco-neblina">Lucas QA</span>
+<span class="w-1.5 h-1.5 rounded-full bg-ciano-tecnico"></span>
+</div>
+<span class="font-metadata text-[11px] text-cinza-azulado-apagado leading-normal">Engenheiro QA</span>
+</div>
+</div>
+<button class="p-1 text-cinza-azulado-apagado hover:text-branco-neblina rounded transition-colors" title="Opções de conta">
+<span class="material-symbols-outlined" data-icon="unfold_more">unfold_more</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- CONTAINER CENTRALIZADO PRINCIPAL -->
+<main class="flex-1 w-full max-w-[1200px] mx-auto px-margin py-space-xl flex flex-col gap-space-xl">
+<!-- CABEÇALHO DA PÁGINA COM AÇÃO PRIMÁRIA -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md pb-space-xs border-b border-borda-sutil">
+<div>
+<h1 class="font-page-title text-page-title text-branco-neblina tracking-tight">Painel Operacional</h1>
+<p class="font-body text-body text-cinza-azulado-claro mt-1">Visão geral das suas varreduras e integridade de microsserviços</p>
+</div>
+<div class="flex items-center gap-space-sm self-start sm:self-auto">
+<button class="h-[38px] px-3.5 rounded-[6px] border border-borda-sutil bg-ardosia-profunda text-branco-neblina hover:bg-ardosia-elevada hover:border-borda-media font-body-medium text-body-medium flex items-center gap-2 transition-all duration-150">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+          Filtros
+        </button>
+<button class="h-[38px] px-4 rounded-[6px] bg-ciano-tecnico hover:bg-primary text-ciano-profundo font-body-medium text-body-medium flex items-center gap-2 transition-colors duration-150 shadow-none font-semibold">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+          Nova Varredura
+        </button>
+</div>
+</div>
+<!-- FAIXA DE ESTATÍSTICAS (4 CARTÕES KPI) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Cartão 1: Em fila -->
+<div class="p-space-md rounded-[10px] bg-ardosia-profunda border border-borda-sutil hover:border-borda-media transition-colors flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-medium text-cinza-azulado-claro text-table-header uppercase tracking-wider">Em fila</span>
+<div class="w-6 h-6 rounded-[4px] bg-surface-container-high flex items-center justify-center text-cinza-azulado-claro">
+<span class="material-symbols-outlined" data-icon="hourglass_empty">hourglass_empty</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-technical-mono text-3xl font-semibold text-cinza-azulado-claro">3</span>
+<span class="font-metadata text-metadata text-cinza-azulado-apagado">aguardando worker</span>
+</div>
+</div>
+<!-- Cartão 2: Em execução (Destaque Ciano Técnico com Pulso) -->
+<div class="p-space-md rounded-[10px] bg-ardosia-profunda border border-borda-sutil hover:border-ciano-tecnico/40 transition-colors flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -right-8 -bottom-8 w-24 h-24 bg-ciano-tecnico/5 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<span class="font-body-medium text-ciano-tecnico text-table-header uppercase tracking-wider flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-ciano-tecnico status-pulse"></span>
+            Em execução
+          </span>
+<div class="w-6 h-6 rounded-[4px] bg-ciano-tecnico/10 border border-ciano-tecnico/20 flex items-center justify-center text-ciano-tecnico">
+<span class="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-technical-mono text-3xl font-semibold text-ciano-tecnico">1</span>
+<span class="font-metadata text-metadata text-cinza-azulado-claro">varredura ativa</span>
+</div>
+</div>
+<!-- Cartão 3: Concluídas (Verde Menta) -->
+<div class="p-space-md rounded-[10px] bg-ardosia-profunda border border-borda-sutil hover:border-borda-media transition-colors flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-medium text-cinza-azulado-claro text-table-header uppercase tracking-wider">Concluídas</span>
+<div class="w-6 h-6 rounded-[4px] bg-verde-menta/10 border border-verde-menta/20 flex items-center justify-center text-verde-menta">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-technical-mono text-3xl font-semibold text-verde-menta">48</span>
+<span class="font-metadata text-metadata text-cinza-azulado-apagado">últimas 24h</span>
+</div>
+</div>
+<!-- Cartão 4: Falhas (Coral) -->
+<div class="p-space-md rounded-[10px] bg-ardosia-profunda border border-borda-sutil hover:border-coral/40 transition-colors flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-medium text-coral text-table-header uppercase tracking-wider">Falhas</span>
+<div class="w-6 h-6 rounded-[4px] bg-coral/10 border border-coral/20 flex items-center justify-center text-coral">
+<span class="material-symbols-outlined" data-icon="error_outline">error_outline</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-technical-mono text-3xl font-semibold text-coral">2</span>
+<span class="font-metadata text-metadata text-cinza-azulado-apagado">requerem atenção</span>
+</div>
+</div>
+</div>
+<!-- SEÇÃO: EXECUÇÕES RECENTES -->
+<div class="flex flex-col gap-space-sm">
+<!-- Cabeçalho da Seção -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<h2 class="font-section-title text-section-title text-branco-neblina">Execuções recentes</h2>
+<span class="font-technical-mono text-metadata px-2 py-0.5 rounded-full bg-ardosia-elevada border border-borda-sutil text-cinza-azulado-claro">5 mais recentes</span>
+</div>
+<a class="font-body-medium text-technical-mono text-ciano-tecnico hover:underline flex items-center gap-1 transition-colors" href="#">
+          Ver todas
+          <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Tabela Estruturada & Rica -->
+<div class="w-full overflow-x-auto rounded-[10px] border border-borda-sutil bg-ardosia-profunda shadow-none">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-grade-tabela bg-azul-noite-barra">
+<th class="py-3 px-4 font-table-header text-table-header uppercase tracking-wider text-cinza-azulado-apagado" scope="col">ID</th>
+<th class="py-3 px-4 font-table-header text-table-header uppercase tracking-wider text-cinza-azulado-apagado" scope="col">Sistema</th>
+<th class="py-3 px-4 font-table-header text-table-header uppercase tracking-wider text-cinza-azulado-apagado" scope="col">Status</th>
+<th class="py-3 px-4 font-table-header text-table-header uppercase tracking-wider text-cinza-azulado-apagado" scope="col">Iniciado em</th>
+<th class="py-3 px-4 font-table-header text-table-header uppercase tracking-wider text-cinza-azulado-apagado" scope="col">Duração</th>
+<th class="py-3 px-4 font-table-header text-table-header uppercase tracking-wider text-cinza-azulado-apagado text-right" scope="col">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-grade-tabela font-table-cell text-table-cell">
+<!-- Linha 1: Executando -->
+<tr class="bg-ardosia-profunda hover:bg-ardosia-elevada transition-colors">
+<td class="py-3.5 px-4 font-technical-mono text-technical-mono text-ciano-tecnico font-medium">#1042</td>
+<td class="py-3.5 px-4 text-branco-neblina font-body-medium">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-cinza-azulado-apagado" data-icon="laptop_chromebook">laptop_chromebook</span>
+                  Portal do Cliente
+                </div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-metadata font-body-medium bg-ciano-tecnico/10 border border-ciano-tecnico/30 text-ciano-tecnico">
+<span class="w-1.5 h-1.5 rounded-full bg-ciano-tecnico status-pulse"></span>
+                  Executando
+                </span>
+</td>
+<td class="py-3.5 px-4 text-cinza-azulado-claro font-metadata">Hoje, 14:32</td>
+<td class="py-3.5 px-4 font-technical-mono text-technical-mono text-ciano-tecnico">Em andamento</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded-[6px] border border-borda-sutil hover:border-ciano-tecnico hover:bg-ardosia-elevada text-cinza-azulado-claro hover:text-ciano-tecnico font-body-medium text-[12px] transition-colors inline-flex items-center gap-1">
+                  Ver detalhes
+                  <span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Linha 2: Concluída -->
+<tr class="bg-linha-alternada hover:bg-ardosia-elevada transition-colors">
+<td class="py-3.5 px-4 font-technical-mono text-technical-mono text-cinza-azulado-claro">#1041</td>
+<td class="py-3.5 px-4 text-branco-neblina font-body-medium">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-cinza-azulado-apagado" data-icon="api">api</span>
+                  API de Pedidos
+                </div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-metadata font-body-medium bg-verde-menta/10 border border-verde-menta/30 text-verde-menta">
+<span class="w-1.5 h-1.5 rounded-full bg-verde-menta"></span>
+                  Concluída
+                </span>
+</td>
+<td class="py-3.5 px-4 text-cinza-azulado-claro font-metadata">Hoje, 11:15</td>
+<td class="py-3.5 px-4 font-technical-mono text-technical-mono text-cinza-azulado-apagado">1m 45s</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded-[6px] border border-borda-sutil hover:border-borda-media hover:bg-ardosia-elevada text-cinza-azulado-claro hover:text-branco-neblina font-body-medium text-[12px] transition-colors inline-flex items-center gap-1">
+                  Ver detalhes
+                  <span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Linha 3: Falhou -->
+<tr class="bg-ardosia-profunda hover:bg-ardosia-elevada transition-colors">
+<td class="py-3.5 px-4 font-technical-mono text-technical-mono text-coral">#1040</td>
+<td class="py-3.5 px-4 text-branco-neblina font-body-medium">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-cinza-azulado-apagado" data-icon="shopping_cart">shopping_cart</span>
+                  Checkout Web
+                </div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-metadata font-body-medium bg-coral/10 border border-coral/30 text-coral">
+<span class="w-1.5 h-1.5 rounded-full bg-coral"></span>
+                  Falhou
+                </span>
+</td>
+<td class="py-3.5 px-4 text-cinza-azulado-claro font-metadata">Ontem, 19:40</td>
+<td class="py-3.5 px-4 font-technical-mono text-technical-mono text-cinza-azulado-apagado">42s</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded-[6px] border border-borda-sutil hover:border-coral hover:bg-ardosia-elevada text-cinza-azulado-claro hover:text-coral font-body-medium text-[12px] transition-colors inline-flex items-center gap-1">
+                  Ver detalhes
+                  <span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Linha 4: Em fila -->
+<tr class="bg-linha-alternada hover:bg-ardosia-elevada transition-colors">
+<td class="py-3.5 px-4 font-technical-mono text-technical-mono text-cinza-azulado-claro">#1039</td>
+<td class="py-3.5 px-4 text-branco-neblina font-body-medium">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-cinza-azulado-apagado" data-icon="notifications">notifications</span>
+                  Microsserviço de Notificações
+                </div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-metadata font-body-medium bg-surface-container-high border border-borda-sutil text-cinza-azulado-apagado">
+<span class="w-1.5 h-1.5 rounded-full bg-cinza-azulado-apagado"></span>
+                  Em fila
+                </span>
+</td>
+<td class="py-3.5 px-4 text-cinza-azulado-claro font-metadata">Ontem, 17:10</td>
+<td class="py-3.5 px-4 font-technical-mono text-technical-mono text-cinza-azulado-apagado">-</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded-[6px] border border-borda-sutil hover:border-borda-media hover:bg-ardosia-elevada text-cinza-azulado-claro hover:text-branco-neblina font-body-medium text-[12px] transition-colors inline-flex items-center gap-1">
+                  Ver detalhes
+                  <span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Linha 5: Concluída -->
+<tr class="bg-ardosia-profunda hover:bg-ardosia-elevada transition-colors">
+<td class="py-3.5 px-4 font-technical-mono text-technical-mono text-cinza-azulado-claro">#1038</td>
+<td class="py-3.5 px-4 text-branco-neblina font-body-medium">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-cinza-azulado-apagado" data-icon="admin_panel_settings">admin_panel_settings</span>
+                  Painel Administrativo
+                </div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-metadata font-body-medium bg-verde-menta/10 border border-verde-menta/30 text-verde-menta">
+<span class="w-1.5 h-1.5 rounded-full bg-verde-menta"></span>
+                  Concluída
+                </span>
+</td>
+<td class="py-3.5 px-4 text-cinza-azulado-claro font-metadata">Ontem, 14:02</td>
+<td class="py-3.5 px-4 font-technical-mono text-technical-mono text-cinza-azulado-apagado">3m 12s</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded-[6px] border border-borda-sutil hover:border-borda-media hover:bg-ardosia-elevada text-cinza-azulado-claro hover:text-branco-neblina font-body-medium text-[12px] transition-colors inline-flex items-center gap-1">
+                  Ver detalhes
+                  <span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Barra de Resumo Rápido da Tabela -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-2 px-1 pt-1 font-metadata text-metadata text-cinza-azulado-apagado">
+<div class="flex items-center gap-2">
+<span>Modo de execução concorrente: habilitado</span>
+<span>•</span>
+<span class="text-verde-menta flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+            Todos os 8 nós operacionais
+          </span>
+</div>
+<div class="flex items-center gap-4">
+<span>Tempo médio de ciclo: 1m 58s</span>
+<span>•</span>
+<span>Taxa de sucesso: 96%</span>
+</div>
+</div>
+</div>
+</main>
+<!-- RODAPÉ TÉCNICO DISCRETO -->
+<footer class="w-full bg-surface-container-lowest border-t border-borda-sutil mt-auto">
+<div class="w-full max-w-[1200px] mx-auto px-margin py-space-md flex flex-col md:flex-row justify-between items-center gap-space-sm font-metadata text-metadata text-cinza-azulado-apagado">
+<div class="flex items-center gap-3">
+<span class="font-technical-mono">QAwler Operacional v2.4.1-rc3</span>
+<span>•</span>
+<span class="flex items-center gap-1.5 text-branco-neblina">
+<span class="w-2 h-2 rounded-full bg-verde-menta"></span>
+          Todos os microsserviços operacionais
+        </span>
+</div>
+<div class="flex items-center gap-space-md">
+<a class="hover:text-ciano-tecnico transition-colors duration-150" href="#">Termos de Serviço</a>
+<a class="hover:text-ciano-tecnico transition-colors duration-150" href="#">Privacidade</a>
+<a class="hover:text-ciano-tecnico transition-colors duration-150" href="#">Status da Infraestrutura</a>
+<a class="hover:text-ciano-tecnico transition-colors duration-150" href="#">Registro de Alterações</a>
+</div>
+<div class="font-metadata text-cinza-azulado-apagado">
+        © 2025 QAwler Inc. • Ambiente Operacional Seguro
+      </div>
+</div>
+</footer>
+</body></html>

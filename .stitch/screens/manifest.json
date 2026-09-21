@@ -1,0 +1,36 @@
+{
+ "projeto": "QAwler",
+ "projectId": "9770563991880524861",
+ "telas": [
+  {
+   "arquivo": "01_login.png",
+   "titulo": "QAwler · Login (revisado)",
+   "screenId": "fe83a2b4d3a84b2f99b5b5c41a604625",
+   "html": "01_login.html"
+  },
+  {
+   "arquivo": "02_dashboard.png",
+   "titulo": "QAwler · Dashboard",
+   "screenId": "45daf8d08c0947688a2b1fbcec84275b",
+   "html": "02_dashboard.html"
+  },
+  {
+   "arquivo": "03_sistemas.png",
+   "titulo": "QAwler · Sistemas Monitorados",
+   "screenId": "10a227214f9d4033b285d0b45c68d130",
+   "html": "03_sistemas.html"
+  },
+  {
+   "arquivo": "04_detalhe.png",
+   "titulo": "QAwler · Detalhe do Teste #1042",
+   "screenId": "cf76e34ee69d411f90c57751abcade2e",
+   "html": "04_detalhe.html"
+  },
+  {
+   "arquivo": "05_relatorio.png",
+   "titulo": "QAwler · Relatório de Teste #1042",
+   "screenId": "9c5524b1f012458b9194bfaa298ad086",
+   "html": "05_relatorio.html"
+  }
+ ]
+}

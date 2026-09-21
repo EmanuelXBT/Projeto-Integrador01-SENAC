@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QAwler - Sistemas monitorados</title>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "#8aebff",
+            "inverse-on-surface": "#2d3137",
+            "linha-alternada": "#172030",
+            "surface-container": "#1c2026",
+            "error-container": "#93000a",
+            "ciano-tecnico": "#22D3EE",
+            "surface": "#10141a",
+            "surface-tint": "#2fd9f4",
+            "secondary-fixed": "#dae3f5",
+            "cinza-azulado-apagado": "#7C8799",
+            "azul-informativo": "#60A5FA",
+            "on-secondary-container": "#acb6c7",
+            "on-background": "#dfe2eb",
+            "surface-container-highest": "#31353c",
+            "surface-container-lowest": "#0a0e14",
+            "surface-container-high": "#262a31",
+            "on-primary": "#00363e",
+            "cinza-azulado-claro": "#A6AEC2",
+            "on-tertiary-fixed": "#2a1800",
+            "inverse-surface": "#dfe2eb",
+            "tertiary": "#ffd6a3",
+            "tertiary-fixed-dim": "#ffb957",
+            "on-primary-fixed": "#001f25",
+            "primary-fixed-dim": "#2fd9f4",
+            "on-error-container": "#ffdad6",
+            "ciano-profundo": "#06272E",
+            "grade-tabela": "#212B3B",
+            "tertiary-container": "#ffb13b",
+            "ardosia-elevada": "#1B2431",
+            "borda-sutil": "#2A3446",
+            "surface-container-low": "#181c22",
+            "secondary-fixed-dim": "#bec7d8",
+            "on-secondary-fixed-variant": "#3e4756",
+            "coral": "#F87171",
+            "on-secondary": "#28313e",
+            "azul-selecao": "#1E3A5F",
+            "on-surface-variant": "#bbc9cd",
+            "borda-media": "#3A4557",
+            "ardosia-profunda": "#141B26",
+            "tertiary-fixed": "#ffddb5",
+            "inverse-primary": "#006877",
+            "surface-variant": "#31353c",
+            "verde-menta": "#34D399",
+            "outline": "#859397",
+            "on-tertiary-fixed-variant": "#643f00",
+            "surface-bright": "#353940",
+            "azul-noite-absoluto": "#0A0E14",
+            "error": "#ffb4ab",
+            "on-tertiary": "#462b00",
+            "outline-variant": "#3c494c",
+            "secondary": "#bec7d8",
+            "on-secondary-fixed": "#131c29",
+            "secondary-container": "#3e4756",
+            "ambar": "#FBBF24",
+            "on-error": "#690005",
+            "borda-campo": "#606E8E",
+            "primary-fixed": "#a2eeff",
+            "primary-container": "#22d3ee",
+            "azul-noite-barra": "#101722",
+            "on-surface": "#dfe2eb",
+            "on-primary-fixed-variant": "#004e5a",
+            "surface-dim": "#10141a",
+            "on-primary-container": "#005763",
+            "branco-neblina": "#E5EAF2",
+            "background": "#10141a",
+            "on-tertiary-container": "#6e4600",
+            "alta-severidade": "#FB923C"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin": "24px",
+            "space-xl": "32px",
+            "space-md": "16px",
+            "space-lg": "24px",
+            "space-xs": "8px",
+            "space-sm": "12px",
+            "gutter": "16px",
+            "space-xxl": "48px"
+          },
+          "fontFamily": {
+            "table-header": ["Inter", "sans-serif"],
+            "metadata": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "technical-mono": ["JetBrains Mono", "monospace"],
+            "section-title": ["Inter", "sans-serif"],
+            "body-medium": ["Inter", "sans-serif"],
+            "page-title": ["Inter", "sans-serif"],
+            "table-cell": ["Inter", "sans-serif"]
+          },
+          "fontSize": {
+            "table-header": ["12px", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "metadata": ["12px", { "lineHeight": "1.4", "fontWeight": "400" }],
+            "body": ["14px", { "lineHeight": "1.45", "fontWeight": "400" }],
+            "technical-mono": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+            "section-title": ["15px", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "body-medium": ["14px", { "lineHeight": "1.45", "fontWeight": "500" }],
+            "page-title": ["22px", { "lineHeight": "1.3", "fontWeight": "600" }],
+            "table-cell": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-azul-noite-absoluto text-on-surface font-body text-body min-h-screen flex flex-col antialiased selection:bg-azul-selecao selection:text-ciano-tecnico">
+<!-- TOP APP BAR -->
+<header class="w-full bg-azul-noite-barra border-b border-borda-sutil sticky top-0 z-40 h-16">
+<div class="w-full max-w-[1200px] mx-auto px-margin h-full flex items-center justify-between">
+<!-- Brand & Version Anchor -->
+<div class="flex items-center gap-space-lg">
+<a class="font-page-title text-page-title text-branco-neblina flex items-center gap-space-xs tracking-tight hover:opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined text-ciano-tecnico text-[24px]">terminal</span>
+<span>QAwler</span>
+<span class="font-technical-mono text-[11px] px-1.5 py-0.5 rounded bg-ardosia-profunda text-cinza-azulado-claro border border-borda-sutil font-medium tracking-normal">v2.4</span>
+</a>
+<!-- Desktop Navigation Tabs -->
+<nav class="hidden md:flex items-center gap-space-md h-16">
+<a class="text-cinza-azulado-claro font-body text-body hover:text-ciano-tecnico transition-colors duration-150 py-1" href="#">
+            Painel Geral
+          </a>
+<a class="text-ciano-tecnico font-body text-body border-b-2 border-ciano-tecnico h-full flex items-center pt-0.5" href="#">
+            Sistemas
+          </a>
+<a class="text-cinza-azulado-claro font-body text-body hover:text-ciano-tecnico transition-colors duration-150 py-1" href="#">
+            Testes
+          </a>
+<a class="text-cinza-azulado-claro font-body text-body hover:text-ciano-tecnico transition-colors duration-150 py-1" href="#">
+            Relatórios
+          </a>
+</nav>
+</div>
+<!-- Right cluster: Cluster telemetry & User profile -->
+<div class="flex items-center gap-space-md">
+<!-- Telemetry Pill -->
+<div class="hidden sm:flex items-center gap-2 bg-ardosia-profunda border border-borda-sutil px-2.5 py-1 rounded">
+<span class="w-2 h-2 rounded-full bg-verde-menta animate-pulse"></span>
+<span class="font-technical-mono text-[12px] text-cinza-azulado-claro">Cluster: sp-01</span>
+<span class="font-technical-mono text-[11px] text-cinza-azulado-apagado border-l border-borda-sutil pl-2">24ms</span>
+</div>
+<div class="h-5 w-[1px] bg-borda-sutil hidden sm:block"></div>
+<!-- User Identity -->
+<div class="flex items-center gap-space-xs cursor-pointer hover:bg-ardosia-elevada p-1.5 rounded transition-colors duration-150">
+<div class="w-8 h-8 rounded bg-ardosia-profunda border border-borda-media flex items-center justify-center font-technical-mono text-ciano-tecnico text-[13px] font-semibold">
+            LQ
+          </div>
+<div class="hidden lg:flex flex-col text-left">
+<span class="font-body-medium text-body-medium text-branco-neblina leading-tight">Lucas QA</span>
+<span class="font-metadata text-metadata text-cinza-azulado-apagado leading-tight">Engenheiro QA</span>
+</div>
+<span class="material-symbols-outlined text-cinza-azulado-apagado text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN VIEW CANVAS -->
+<main class="flex-1 w-full max-w-[1200px] mx-auto px-margin py-space-lg">
+<!-- Title & Breadcrumb/Meta context -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md pb-space-lg">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="font-technical-mono text-[12px] text-ciano-tecnico">INFRAESTRUTURA</span>
+<span class="text-cinza-azulado-apagado text-[12px]">/</span>
+<span class="font-technical-mono text-[12px] text-cinza-azulado-claro">ROUTING</span>
+</div>
+<h1 class="font-page-title text-page-title text-branco-neblina tracking-tight">
+          Sistemas monitorados
+        </h1>
+<p class="font-body text-body text-cinza-azulado-claro mt-1">
+          Gerencie os ambientes e rotinas de automação de testes dos seus microsserviços.
+        </p>
+</div>
+<!-- Quick KPI Counters -->
+<div class="flex items-center gap-space-sm font-technical-mono text-metadata">
+<div class="bg-ardosia-profunda border border-borda-sutil px-3 py-1.5 rounded flex items-center gap-2">
+<span class="text-cinza-azulado-apagado">Total:</span>
+<span class="text-branco-neblina font-semibold">4</span>
+</div>
+<div class="bg-ardosia-profunda border border-borda-sutil px-3 py-1.5 rounded flex items-center gap-2">
+<span class="text-verde-menta">●</span>
+<span class="text-cinza-azulado-apagado">Estáveis:</span>
+<span class="text-branco-neblina font-semibold">3</span>
+</div>
+</div>
+</div>
+<!-- Toolbar: Search, Filters & Action Button -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-md mb-space-md">
+<div class="flex flex-1 items-center gap-space-sm max-w-xl">
+<!-- Search Input -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-cinza-azulado-apagado text-[18px] pointer-events-none">search</span>
+<input class="w-full bg-azul-noite-barra border border-borda-sutil hover:border-borda-media focus:border-ciano-tecnico focus:ring-1 focus:ring-ciano-tecnico rounded text-branco-neblina pl-9 pr-3 py-2 text-[13px] font-body transition-colors duration-150 outline-none placeholder:text-cinza-azulado-apagado" placeholder="Buscar por nome ou URL…" type="text"/>
+</div>
+<!-- Filter Selector -->
+<div class="relative w-48">
+<select class="w-full bg-azul-noite-barra border border-borda-sutil hover:border-borda-media focus:border-ciano-tecnico focus:ring-1 focus:ring-ciano-tecnico rounded text-branco-neblina px-3 py-2 text-[13px] font-body appearance-none cursor-pointer outline-none transition-colors duration-150 pr-8">
+<option value="all">Todos os ambientes</option>
+<option value="prod">Produção (PROD)</option>
+<option value="staging">Homologação (STAGING)</option>
+<option value="dev">Desenvolvimento (DEV)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-cinza-azulado-apagado text-[18px] pointer-events-none">unfold_more</span>
+</div>
+</div>
+<!-- Primary Call to Action -->
+<button class="bg-primary-container text-ciano-profundo hover:bg-opacity-90 px-4 py-2 rounded font-body-medium text-body-medium flex items-center justify-center gap-1.5 transition-colors duration-150 font-semibold cursor-pointer shadow-none">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Novo sistema</span>
+</button>
+</div>
+<!-- Data Panel / Table Container -->
+<div class="w-full bg-ardosia-profunda rounded-xl border border-borda-sutil overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-azul-noite-barra border-b border-grade-tabela text-cinza-azulado-apagado font-table-header text-table-header tracking-wider uppercase">
+<th class="py-3.5 px-4 font-semibold" scope="col">Nome</th>
+<th class="py-3.5 px-4 font-semibold" scope="col">URL</th>
+<th class="py-3.5 px-4 font-semibold" scope="col">Ambiente</th>
+<th class="py-3.5 px-4 font-semibold" scope="col">Último teste</th>
+<th class="py-3.5 px-4 font-semibold text-right" scope="col">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-grade-tabela">
+<!-- ROW 1: Portal do Cliente -->
+<tr class="bg-ardosia-profunda hover:bg-ardosia-elevada transition-colors duration-150 group">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-azul-noite-barra border border-borda-sutil flex items-center justify-center text-ciano-tecnico flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+</div>
+<div>
+<span class="font-body-medium text-body-medium text-branco-neblina block">Portal do Cliente</span>
+<span class="font-metadata text-[11px] text-cinza-azulado-apagado">ID: sys-0891</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<a class="font-technical-mono text-technical-mono text-cinza-azulado-claro hover:text-ciano-tecnico flex items-center gap-1.5 transition-colors" href="https://app.portalcliente.com.br" rel="noopener noreferrer" target="_blank">
+<span>https://app.portalcliente.com.br</span>
+<span class="material-symbols-outlined text-[14px] text-cinza-azulado-apagado">open_in_new</span>
+</a>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-technical-mono text-[11px] font-semibold bg-surface-container border border-borda-sutil text-branco-neblina">
+                  PROD
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
+<span class="font-metadata text-metadata text-cinza-azulado-claro">Hoje, 14:32</span>
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full font-metadata text-[11px] bg-azul-noite-barra border border-verde-menta/30 text-verde-menta">
+<span class="w-1.5 h-1.5 rounded-full bg-verde-menta"></span>
+                    Concluída
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-2 font-metadata text-metadata">
+<button class="text-ciano-tecnico hover:text-primary transition-colors flex items-center gap-1 py-1 px-2 rounded hover:bg-azul-selecao/30">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span class="font-medium">Executar teste</span>
+</button>
+<button class="text-cinza-azulado-claro hover:text-branco-neblina transition-colors py-1 px-2 rounded hover:bg-ardosia-profunda hidden md:inline-block">
+                    Agendar
+                  </button>
+<button class="text-cinza-azulado-claro hover:text-branco-neblina transition-colors py-1 px-2 rounded hover:bg-ardosia-profunda hidden md:inline-block">
+                    Editar
+                  </button>
+<button class="text-coral/80 hover:text-coral transition-colors py-1 px-2 rounded hover:bg-error-container/20 hidden md:inline-block">
+                    Desativar
+                  </button>
+<button class="md:hidden text-cinza-azulado-apagado hover:text-branco-neblina p-1">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 2: API de Pedidos -->
+<tr class="bg-linha-alternada hover:bg-ardosia-elevada transition-colors duration-150 group">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-azul-noite-barra border border-borda-sutil flex items-center justify-center text-ciano-tecnico flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">api</span>
+</div>
+<div>
+<span class="font-body-medium text-body-medium text-branco-neblina block">API de Pedidos</span>
+<span class="font-metadata text-[11px] text-cinza-azulado-apagado">ID: sys-0412</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<a class="font-technical-mono text-technical-mono text-cinza-azulado-claro hover:text-ciano-tecnico flex items-center gap-1.5 transition-colors" href="https://api.pedidos.com.br" rel="noopener noreferrer" target="_blank">
+<span>https://api.pedidos.com.br</span>
+<span class="material-symbols-outlined text-[14px] text-cinza-azulado-apagado">open_in_new</span>
+</a>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-technical-mono text-[11px] font-semibold bg-surface-container border border-borda-sutil text-cinza-azulado-claro">
+                  STAGING
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
+<span class="font-metadata text-metadata text-cinza-azulado-claro">Hoje, 11:15</span>
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full font-metadata text-[11px] bg-azul-noite-barra border border-coral/30 text-coral">
+<span class="w-1.5 h-1.5 rounded-full bg-coral"></span>
+                    Falhou
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-2 font-metadata text-metadata">
+<button class="text-ciano-tecnico hover:text-primary transition-colors flex items-center gap-1 py-1 px-2 rounded hover:bg-azul-selecao/30">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span class="font-medium">Executar teste</span>
+</button>
+<button class="text-cinza-azulado-claro hover:text-branco-neblina transition-colors py-1 px-2 rounded hover:bg-ardosia-profunda hidden md:inline-block">
+                    Agendar
+                  </button>
+<button class="text-cinza-azulado-claro hover:text-branco-neblina transition-colors py-1 px-2 rounded hover:bg-ardosia-profunda hidden md:inline-block">
+                    Editar
+                  </button>
+<button class="text-coral/80 hover:text-coral transition-colors py-1 px-2 rounded hover:bg-error-container/20 hidden md:inline-block">
+                    Desativar
+                  </button>
+<button class="md:hidden text-cinza-azulado-apagado hover:text-branco-neblina p-1">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 3: Checkout Web -->
+<tr class="bg-ardosia-profunda hover:bg-ardosia-elevada transition-colors duration-150 group">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-azul-noite-barra border border-borda-sutil flex items-center justify-center text-ciano-tecnico flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+</div>
+<div>
+<span class="font-body-medium text-body-medium text-branco-neblina block">Checkout Web</span>
+<span class="font-metadata text-[11px] text-cinza-azulado-apagado">ID: sys-0239</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<a class="font-technical-mono text-technical-mono text-cinza-azulado-claro hover:text-ciano-tecnico flex items-center gap-1.5 transition-colors" href="https://checkout.loja.com.br" rel="noopener noreferrer" target="_blank">
+<span>https://checkout.loja.com.br</span>
+<span class="material-symbols-outlined text-[14px] text-cinza-azulado-apagado">open_in_new</span>
+</a>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-technical-mono text-[11px] font-semibold bg-surface-container border border-borda-sutil text-cinza-azulado-apagado">
+                  DEV
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
+<span class="font-metadata text-metadata text-cinza-azulado-claro">Ontem, 19:40</span>
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full font-metadata text-[11px] bg-azul-noite-barra border border-verde-menta/30 text-verde-menta">
+<span class="w-1.5 h-1.5 rounded-full bg-verde-menta"></span>
+                    Concluída
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-2 font-metadata text-metadata">
+<button class="text-ciano-tecnico hover:text-primary transition-colors flex items-center gap-1 py-1 px-2 rounded hover:bg-azul-selecao/30">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span class="font-medium">Executar teste</span>
+</button>
+<button class="text-cinza-azulado-claro hover:text-branco-neblina transition-colors py-1 px-2 rounded hover:bg-ardosia-profunda hidden md:inline-block">
+                    Agendar
+                  </button>
+<button class="text-cinza-azulado-claro hover:text-branco-neblina transition-colors py-1 px-2 rounded hover:bg-ardosia-profunda hidden md:inline-block">
+                    Editar
+                  </button>
+<button class="text-coral/80 hover:text-coral transition-colors py-1 px-2 rounded hover:bg-error-container/20 hidden md:inline-block">
+                    Desativar
+                  </button>
+<button class="md:hidden text-cinza-azulado-apagado hover:text-branco-neblina p-1">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 4: Painel Administrativo -->
+<tr class="bg-linha-alternada hover:bg-ardosia-elevada transition-colors duration-150 group">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-azul-noite-barra border border-borda-sutil flex items-center justify-center text-ciano-tecnico flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">shield</span>
+</div>
+<div>
+<span class="font-body-medium text-body-medium text-branco-neblina block">Painel Administrativo</span>
+<span class="font-metadata text-[11px] text-cinza-azulado-apagado">ID: sys-0104</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<a class="font-technical-mono text-technical-mono text-cinza-azulado-claro hover:text-ciano-tecnico flex items-center gap-1.5 transition-colors" href="https://admin.interno.com.br" rel="noopener noreferrer" target="_blank">
+<span>https://admin.interno.com.br</span>
+<span class="material-symbols-outlined text-[14px] text-cinza-azulado-apagado">open_in_new</span>
+</a>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-technical-mono text-[11px] font-semibold bg-surface-container border border-borda-sutil text-branco-neblina">
+                  PROD
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
+<span class="font-metadata text-metadata text-cinza-azulado-claro">Em fila</span>
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full font-metadata text-[11px] bg-azul-noite-barra border border-ambar/30 text-ambar">
+<span class="material-symbols-outlined text-[12px] animate-spin">sync</span>
+                    Aguardando
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="flex items-center justify-end gap-2 font-metadata text-metadata">
+<button class="text-ciano-tecnico hover:text-primary transition-colors flex items-center gap-1 py-1 px-2 rounded hover:bg-azul-selecao/30">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span class="font-medium">Executar teste</span>
+</button>
+<button class="text-cinza-azulado-claro hover:text-branco-neblina transition-colors py-1 px-2 rounded hover:bg-ardosia-profunda hidden md:inline-block">
+                    Agendar
+                  </button>
+<button class="text-cinza-azulado-claro hover:text-branco-neblina transition-colors py-1 px-2 rounded hover:bg-ardosia-profunda hidden md:inline-block">
+                    Editar
+                  </button>
+<button class="text-coral/80 hover:text-coral transition-colors py-1 px-2 rounded hover:bg-error-container/20 hidden md:inline-block">
+                    Desativar
+                  </button>
+<button class="md:hidden text-cinza-azulado-apagado hover:text-branco-neblina p-1">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination stats -->
+<div class="bg-azul-noite-barra px-4 py-3 border-t border-grade-tabela flex flex-col sm:flex-row items-center justify-between gap-2 font-metadata text-metadata text-cinza-azulado-apagado">
+<div>
+          Exibindo <span class="text-branco-neblina font-medium">4</span> de <span class="text-branco-neblina font-medium">4</span> sistemas registrados
+        </div>
+<div class="flex items-center gap-4 font-technical-mono text-[12px]">
+<span class="flex items-center gap-1 text-cinza-azulado-claro">
+<span class="w-1.5 h-1.5 rounded-full bg-verde-menta"></span>
+            Orquestrador em execução contínua
+          </span>
+</div>
+</div>
+</div>
+</main>
+<!-- TECHNICAL FOOTER -->
+<footer class="w-full bg-surface-container-lowest border-t border-borda-sutil mt-auto">
+<div class="w-full max-w-[1200px] mx-auto px-margin py-space-md flex flex-col md:flex-row justify-between items-center gap-space-sm font-metadata text-metadata">
+<!-- Operational status and copyright note -->
+<div class="flex items-center gap-2 text-cinza-azulado-apagado font-technical-mono">
+<span class="w-2 h-2 rounded-full bg-verde-menta"></span>
+<span>© 2025 QAwler Inc. v2.4.1-rc3 • Ambiente Operacional Seguro</span>
+</div>
+<!-- Legal & System Links -->
+<div class="flex flex-wrap items-center justify-center gap-space-md text-cinza-azulado-apagado">
+<a class="hover:text-ciano-tecnico transition-colors duration-150" href="#">Termos de Serviço</a>
+<a class="hover:text-ciano-tecnico transition-colors duration-150" href="#">Privacidade</a>
+<a class="hover:text-ciano-tecnico transition-colors duration-150" href="#">Status da Infraestrutura</a>
+<a class="hover:text-ciano-tecnico transition-colors duration-150" href="#">Registro de Alterações</a>
+</div>
+</div>
+</footer>
+</body></html>
